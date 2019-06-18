@@ -52,6 +52,8 @@ Ticked::Ticked(ClockedObject &object_,
     /* Allocate numCycles if an external stat wasn't passed in */
     numCyclesLocal((imported_num_cycles ? NULL : new Stats::Scalar)),
     numCycles((imported_num_cycles ? *imported_num_cycles :
+        *numCyclesLocal)),
+    numCyclesgc((imported_num_cycles ? *imported_num_cycles :
         *numCyclesLocal))
 { }
 
@@ -59,6 +61,9 @@ void
 Ticked::processClockEvent() {
     ++tickCycles;
     ++numCycles;
+    
+    ++numCyclesgc;
+    
     countCycles(Cycles(1));
     evaluate();
     if (running)
@@ -72,6 +77,9 @@ Ticked::regStats()
         numCycles
             .name(object.name() + ".totalTickCycles")
             .desc("Number of cycles that the object ticked or was stopped");
+        numCyclesgc
+            .name(object.name() + ".totalTickCyclesgc")
+            .desc("Number of cycles that the object ticked or was stopped during gc");
     }
 
     tickCycles

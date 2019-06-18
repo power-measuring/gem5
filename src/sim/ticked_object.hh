@@ -82,6 +82,7 @@ class Ticked : public Serializable
   protected:
     /** Total number of cycles either ticked or spend stopped */
     Stats::Scalar &numCycles;
+    Stats::Scalar &numCyclesgc;
 
     /** Number of cycles ticked */
     Stats::Scalar tickCycles;

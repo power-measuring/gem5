@@ -234,6 +234,10 @@ class System : public SimObject
         return gcFlag;
     }
 
+    Tick getgcTick(){
+        return gcendTick - gcstartTick;
+    }
+
     /** Port to physical memory used for writing object files into ram at
      * boot.*/
     PortProxy physProxy;

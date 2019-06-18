@@ -8,27 +8,31 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/E:/power_measuring/gem5/src/cpu/trace/trace_cpu.hh</file>
-            <file>file:/E:/power_measuring/gem5/src/cpu/base.cc</file>
             <file>file:/E:/power_measuring/gem5/src/cpu/base.hh</file>
+            <file>file:/E:/power_measuring/gem5/src/sim/stats.hh</file>
             <file>file:/E:/power_measuring/gem5/src/cpu/simple/timing.cc</file>
-            <file>file:/E:/power_measuring/gem5/src/sim/system.hh</file>
+            <file>file:/E:/power_measuring/gem5/src/sim/system.cc</file>
             <file>file:/E:/power_measuring/gem5/src/mem/cache/base.hh</file>
+            <file>file:/E:/power_measuring/gem5/src/cpu/minor/cpu.cc</file>
+            <file>file:/E:/power_measuring/gem5/configs/example/se_1.py</file>
+            <file>file:/E:/power_measuring/gem5/src/sim/syscall_emul.cc</file>
+            <file>file:/E:/power_measuring/gem5/src/cpu/o3/cpu.hh</file>
+            <file>file:/E:/power_measuring/gem5/src/cpu/checker/cpu.hh</file>
+            <file>file:/E:/power_measuring/gem5/src/cpu/simple/base.hh</file>
+            <file>file:/E:/power_measuring/gem5/src/cpu/simple/atomic.hh</file>
+            <file>file:/E:/power_measuring/gem5/src/sim/stat_control.cc</file>
+            <file>file:/E:/power_measuring/gem5/src/sim/ticked_object.hh</file>
+            <file>file:/E:/power_measuring/gem5/src/cpu/base.cc</file>
+            <file>file:/E:/power_measuring/gem5/src/sim/system.hh</file>
             <file>file:/E:/power_measuring/gem5/src/mem/cache/base.cc</file>
             <file>file:/E:/power_measuring/gem5/src/cpu/minor/cpu.hh</file>
-            <file>file:/E:/power_measuring/gem5/src/cpu/minor/cpu.cc</file>
             <file>file:/E:/power_measuring/gem5/src/sim/syscall_emul.hh</file>
-            <file>file:/E:/power_measuring/gem5/src/sim/syscall_emul.cc</file>
             <file>file:/E:/power_measuring/gem5/src/sim/syscall_emul_buf.hh</file>
-            <file>file:/E:/power_measuring/gem5/src/cpu/o3/cpu.hh</file>
             <file>file:/E:/power_measuring/gem5/src/cpu/o3/cpu.cc</file>
-            <file>file:/E:/power_measuring/gem5/src/cpu/checker/cpu.hh</file>
             <file>file:/E:/power_measuring/gem5/src/cpu/simple/base.cc</file>
-            <file>file:/E:/power_measuring/gem5/src/cpu/simple/base.hh</file>
             <file>file:/E:/power_measuring/gem5/src/cpu/simple/atomic.cc</file>
-            <file>file:/E:/power_measuring/gem5/src/cpu/simple/atomic.hh</file>
             <file>file:/E:/power_measuring/gem5/src/sim/stat_control.hh</file>
-            <file>file:/E:/power_measuring/gem5/src/sim/stat_control.cc</file>
-            <file>file:/E:/power_measuring/gem5/src/cpu/exec_context.cc</file>
+            <file>file:/E:/power_measuring/gem5/src/sim/ticked_object.cc</file>
             <file>file:/E:/power_measuring/gem5/src/arch/arm/linux/process.cc</file>
             <file>file:/E:/power_measuring/gem5/src/cpu/simple/exec_context.hh</file>
         </group>
