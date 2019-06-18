@@ -446,11 +446,17 @@ System::regStats()
 {
     SimObject::regStats();
     using namespace Stats;
+    
+    numTicksgc
+        .name("num_ticks_gc")
+        .desc("Number of ticks simulated during gc")
+        ;
+    
     simTicksgc
         .name("sim_ticks_gc")
         .desc("Number of ticks simulated during gc")
         ;
-    simTicksgc = gcstartTick - gcendTick;
+    simTicksgc = numTicksgc;
     
     simSecondsgc
         .name("sim_seconds_gc")

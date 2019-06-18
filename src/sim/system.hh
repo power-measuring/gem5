@@ -219,6 +219,7 @@ class System : public SimObject
     bool gcFlag;
     Tick gcstartTick;
     Tick gcendTick;
+    Stats::Scalar numTicksgc;
 
     void setgcFlag(bool flag){
 
@@ -227,6 +228,7 @@ class System : public SimObject
             gcstartTick = curTick();
         } else {
             gcendTick = curTick();
+            numTicksgc += curTick() - gcstartTick;
         }
     }
 
