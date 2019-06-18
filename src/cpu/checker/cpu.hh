@@ -148,6 +148,9 @@ class CheckerCPU : public BaseCPU, public ExecContext
     Counter numInst;
     Counter startNumInst;
 
+    //number of instructions during gc
+    Counter numInstgc;
+
     std::queue<int> miscRegIdxs;
 
   public:
@@ -159,6 +162,11 @@ class CheckerCPU : public BaseCPU, public ExecContext
     BaseTLB* getDTBPtr() { return dtb; }
 
     virtual Counter totalInsts() const override
+    {
+        return 0;
+    }
+
+    virtual Counter totalInstsgc() const override
     {
         return 0;
     }

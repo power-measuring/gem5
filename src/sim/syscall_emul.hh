@@ -134,6 +134,12 @@ SyscallReturn ignoreFunc(SyscallDesc *desc, int num, ThreadContext *tc);
 // Target fallocateFunc() handler.
 SyscallReturn fallocateFunc(SyscallDesc *desc, int num, ThreadContext *tc);
 
+//set gc flag system call function , returns 0
+SyscallReturn setgcFlagFunction(SyscallDesc *desc, int callnum,
+                  ThreadContext *tc);
+SyscallReturn resetgcFlagFunction(SyscallDesc *desc, int callnum,
+                  ThreadContext *tc);
+
 /// Target exit() handler: terminate current context.
 SyscallReturn exitFunc(SyscallDesc *desc, int num, ThreadContext *tc);
 

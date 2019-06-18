@@ -429,6 +429,11 @@ BaseCPU::regStats()
         .name(name() + ".numCycles")
         .desc("number of cpu cycles simulated")
         ;
+    
+    numCyclesgc
+        .name(name() + ".numCyclesgc")
+        .desc("number of cpu cycles simulated during gc")
+        ;
 
     numWorkItemsStarted
         .name(name() + ".numWorkItemsStarted")

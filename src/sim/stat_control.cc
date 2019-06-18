@@ -62,7 +62,9 @@
 using namespace std;
 
 Stats::Formula simSeconds;
+Stats::Formula simSecondsgc;
 Stats::Value simTicks;
+Stats::Formula simTicksgc;
 Stats::Value finalTick;
 Stats::Value simFreq;
 

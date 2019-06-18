@@ -931,10 +931,19 @@ class BaseCache : public ClockedObject
     /** Number of misses per thread for each type of command.
         @sa Packet::Command */
     Stats::Vector misses[MemCmd::NUM_MEM_CMDS];
+    /** Number of misses per thread during gc for each type of command.
+        @sa Packet::Command */
+    Stats::Vector missesgc[MemCmd::NUM_MEM_CMDS];
+
     /** Number of misses for demand accesses. */
     Stats::Formula demandMisses;
+    /** Number of misses for demand accesses. */
+    Stats::Formula demandMissesGc;
+
     /** Number of misses for all accesses. */
     Stats::Formula overallMisses;
+    /** Number of misses for all accesses. */
+    Stats::Formula overallMissesGc;
 
     /**
      * Total number of cycles per thread/command spent waiting for a miss.
@@ -1197,6 +1206,9 @@ class BaseCache : public ClockedObject
     {
         assert(pkt->req->masterId() < system->maxMasters());
         misses[pkt->cmdToIndex()][pkt->req->masterId()]++;
+        if(system->getgcFlag()){
+            missesgc[pkt->cmdToIndex()][pkt->req->masterId()]++;
+        }
         pkt->req->incAccessDepth();
         if (missCount) {
             --missCount;

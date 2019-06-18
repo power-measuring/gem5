@@ -1965,8 +1965,15 @@ BaseCache::regStats()
             .desc("number of " + cstr + " misses")
             .flags(total | nozero | nonan)
             ;
+        missesgc[access_idx]
+            .init(system->maxMasters())
+            .name(name() + "." + cstr + "_missesgc")
+            .desc("number of " + cstr + " misses in gc")
+            .flags(total | nozero | nonan)
+            ;
         for (int i = 0; i < system->maxMasters(); i++) {
             misses[access_idx].subname(i, system->getMasterName(i));
+            missesgc[access_idx].subname(i, system->getMasterName(i));
         }
     }
 
@@ -1976,8 +1983,16 @@ BaseCache::regStats()
         .flags(total | nozero | nonan)
         ;
     demandMisses = SUM_DEMAND(misses);
+    demandMissesGc
+        .name(name() + ".demand_misses_gc")
+        .desc("number of demand (read+write) misses")
+        .flags(total | nozero | nonan)
+        ;
+    demandMissesGc = SUM_DEMAND(missesgc);
+    
     for (int i = 0; i < system->maxMasters(); i++) {
         demandMisses.subname(i, system->getMasterName(i));
+        demandMissesGc.subname(i, system->getMasterName(i));
     }
 
     overallMisses
@@ -1986,8 +2001,16 @@ BaseCache::regStats()
         .flags(total | nozero | nonan)
         ;
     overallMisses = demandMisses + SUM_NON_DEMAND(misses);
+    overallMissesGc
+        .name(name() + ".overall_misses_gc")
+        .desc("number of overall misses during gc")
+        .flags(total | nozero | nonan)
+        ;
+    overallMissesGc = demandMissesGc + SUM_NON_DEMAND(missesgc);
+    
     for (int i = 0; i < system->maxMasters(); i++) {
         overallMisses.subname(i, system->getMasterName(i));
+        overallMissesGc.subname(i, system->getMasterName(i));
     }
 
     // Miss latency statistics

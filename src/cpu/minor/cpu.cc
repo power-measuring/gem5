@@ -343,6 +343,17 @@ MinorCPU::totalInsts() const
 }
 
 Counter
+MinorCPU::totalInstsgc() const
+{
+    Counter ret = 0;
+
+//    for (auto i = threads.begin(); i != threads.end(); i ++)
+//        ret += (*i)->numInst;
+
+    return ret;
+}
+
+Counter
 MinorCPU::totalOps() const
 {
     Counter ret = 0;

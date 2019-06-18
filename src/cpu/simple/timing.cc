@@ -938,6 +938,9 @@ TimingSimpleCPU::updateCycleCounts()
     const Cycles delta(curCycle() - previousCycle);
 
     numCycles += delta;
+//    if(system->getgcFlag()){
+//        numCyclesgc += delta;
+//    }
 
     previousCycle = curCycle();
 }

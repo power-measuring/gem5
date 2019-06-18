@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010-2012, 2015, 2017, 2018 ARM Limited
+ * Copyright (c) 2010-2012, 2015, 2017 ARM Limited
  * Copyright (c) 2013 Advanced Micro Devices, Inc.
  * All rights reserved
  *
@@ -43,6 +43,7 @@
 
 #include "cpu/simple/base.hh"
 
+#include "arch/kernel_stats.hh"
 #include "arch/stacktrace.hh"
 #include "arch/utility.hh"
 #include "arch/vtophys.hh"
@@ -69,6 +70,7 @@
 #include "debug/Decode.hh"
 #include "debug/Fetch.hh"
 #include "debug/Quiesce.hh"
+#include "mem/mem_object.hh"
 #include "mem/packet.hh"
 #include "mem/request.hh"
 #include "params/BaseSimpleCPU.hh"
@@ -173,6 +175,11 @@ BaseSimpleCPU::countInst()
     if (!curStaticInst->isMicroop() || curStaticInst->isLastMicroop()) {
         t_info.numInst++;
         t_info.numInsts++;
+        
+        if(system->getgcFlag()){
+            t_info.numInstgc++;
+            t_info.numInstsgc++;
+        }
 
         system->totalNumInsts++;
         t_info.thread->funcExeInst++;
@@ -187,6 +194,17 @@ BaseSimpleCPU::totalInsts() const
     Counter total_inst = 0;
     for (auto& t_info : threadInfo) {
         total_inst += t_info->numInst;
+    }
+
+    return total_inst;
+}
+
+Counter
+BaseSimpleCPU::totalInstsgc() const
+{
+    Counter total_inst = 0;
+    for (auto& t_info : threadInfo) {
+        total_inst += t_info->numInstgc;
     }
 
     return total_inst;
@@ -234,6 +252,35 @@ BaseSimpleCPU::regStats()
             .name(thread_str + ".committedInsts")
             .desc("Number of instructions committed")
             ;
+        
+        t_info.numInstsgc
+            .name(thread_str + ".committedInstsgc")
+            .desc("Number of instructions committed during gc")
+            ;
+        
+        t_info.ipc
+            .name(thread_str + ".ipc")
+            .desc("IPC: Instructions Per Cycle")
+            .precision(6);
+        t_info.ipc =  t_info.numInsts / numCycles;
+
+        t_info.totalIpc
+            .name(thread_str + ".ipc_total")
+            .desc("IPC: Total IPC of All Threads")
+            .precision(6);
+        t_info.totalIpc =  sum(t_info.numInsts) / numCycles;
+        
+        t_info.ipcgc
+            .name(thread_str + ".ipcgc")
+            .desc("IPC: Instructions Per Cycle")
+            .precision(6);
+        t_info.ipcgc =  t_info.numInstsgc / numCyclesgc;
+
+        t_info.totalIpcgc
+            .name(thread_str + ".ipc_total_gc")
+            .desc("IPC: Total IPC of All Threads")
+            .precision(6);
+        t_info.totalIpcgc =  sum(t_info.numInstsgc) / numCyclesgc;
 
         t_info.numOps
             .name(thread_str + ".committedOps")
@@ -407,6 +454,7 @@ BaseSimpleCPU::resetStats()
     for (auto &thread_info : threadInfo) {
         thread_info->notIdleFraction = (_status != Idle);
     }
+    
 }
 
 void
@@ -493,10 +541,6 @@ BaseSimpleCPU::preExecute()
 #if THE_ISA == ALPHA_ISA
     thread->setFloatReg(ZeroReg, 0);
 #endif // ALPHA_ISA
-
-    // resets predicates
-    t_info.setPredicate(true);
-    t_info.setMemAccPredicate(true);
 
     // check for instruction-count-based events
     comInstEventQueue[curThread]->serviceEvents(t_info.numInst);

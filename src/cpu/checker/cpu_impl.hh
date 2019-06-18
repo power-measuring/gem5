@@ -203,6 +203,10 @@ Checker<Impl>::verify(const DynInstPtr &completed_inst)
         }
         numCycles++;
 
+        if(system->getgcFlag()) {
+            numCyclesgc++;
+        }
+
         Fault fault = NoFault;
 
         // maintain $r0 semantics
@@ -352,6 +356,9 @@ Checker<Impl>::verify(const DynInstPtr &completed_inst)
 
         // keep an instruction count
         numInst++;
+        if(system->getgcFlag()){
+            numInstgc++;
+        }
 
 
         // Either the instruction was a fault and we should process the fault,

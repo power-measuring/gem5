@@ -445,6 +445,18 @@ void
 System::regStats()
 {
     SimObject::regStats();
+    using namespace Stats;
+    simTicksgc
+        .name("sim_ticks_gc")
+        .desc("Number of ticks simulated during gc")
+        ;
+    simTicksgc = gcstartTick - gcendTick;
+    
+    simSecondsgc
+        .name("sim_seconds_gc")
+        .desc("Number of seconds simulated")
+        ;
+    simSecondsgc = simTicksgc / simFreq;
 
     for (uint32_t j = 0; j < numWorkIds ; j++) {
         workItemStats[j] = new Stats::Histogram();

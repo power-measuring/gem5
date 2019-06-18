@@ -196,8 +196,10 @@ static SyscallDesc syscallDescs32[] = {
     /* 28 */ SyscallDesc("unused#28", unimplementedFunc),
     /* 29 */ SyscallDesc("pause", unimplementedFunc),
     /* 30 */ SyscallDesc("utime", unimplementedFunc),
-    /* 31 */ SyscallDesc("unused#31", unimplementedFunc),
-    /* 32 */ SyscallDesc("unused#32", unimplementedFunc),
+    //change unused#31 to setgcFlagFunction
+    /* 31 */ SyscallDesc("setgcFlag", setgcFlagFunction),
+    //change unused#31 to setgcFlagFunction
+    /* 32 */ SyscallDesc("resetgcFlag", resetgcFlagFunction),
     /* 33 */ SyscallDesc("access", accessFunc),
     /* 34 */ SyscallDesc("nice", unimplementedFunc),
     /* 35 */ SyscallDesc("unused#35", unimplementedFunc),

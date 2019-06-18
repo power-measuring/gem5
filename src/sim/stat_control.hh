@@ -52,6 +52,7 @@ namespace Stats {
 double statElapsedTime();
 
 Tick statElapsedTicks();
+Tick statElapsedTicksgc();
 
 Tick statFinalTick();
 

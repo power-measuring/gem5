@@ -63,6 +63,26 @@ warnUnsupportedOS(std::string syscall_name)
     warn("Cannot invoke %s on host operating system.", syscall_name);
 }
 
+SyscallReturn setgcFlagFunction(SyscallDesc *desc, int callnum,
+                  ThreadContext *tc)
+{
+    warn("This is a test system call, function name: %s, set gcflag to true", desc->name());
+    System *sys = tc->getSystemPtr();
+    
+    sys->setgcFlag(true);
+    return 0;
+}
+
+SyscallReturn resetgcFlagFunction(SyscallDesc *desc, int callnum, 
+                  ThreadContext *tc)
+{
+    warn("This is a test system call, function name: %s, set gcflag to false", desc->name());
+    System *sys = tc->getSystemPtr();
+    
+    sys->setgcFlag(false);
+    return 0;
+}
+
 SyscallReturn
 unimplementedFunc(SyscallDesc *desc, int callnum, ThreadContext *tc)
 {

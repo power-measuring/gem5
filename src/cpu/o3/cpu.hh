@@ -309,6 +309,7 @@ class FullO3CPU : public BaseO3CPU
 
     /** Count the Total Instructions Committed in the CPU. */
     Counter totalInsts() const override;
+    Counter totalInstsgc() const override;
 
     /** Count the Total Ops (including micro ops) committed in the CPU. */
     Counter totalOps() const override;

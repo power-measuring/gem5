@@ -162,6 +162,11 @@ class TraceCPU : public BaseCPU
         return 0;
     }
 
+    Counter totalInstsgc() const
+    {
+        return 0;
+    }
+
     /**
      * Return totalOps as the number of committed micro-ops plus the
      * speculatively issued loads that are modelled in the TraceCPU replay.

@@ -434,6 +434,7 @@ class BaseCPU : public ClockedObject
     virtual void unserializeThread(CheckpointIn &cp, ThreadID tid) {};
 
     virtual Counter totalInsts() const = 0;
+    virtual Counter totalInstsgc() const = 0;
 
     virtual Counter totalOps() const = 0;
 
@@ -619,6 +620,8 @@ class BaseCPU : public ClockedObject
   public:
     // Number of CPU cycles simulated
     Stats::Scalar numCycles;
+    // Number of CPU cycles simulated during gc
+    Stats::Scalar numCyclesgc;
     Stats::Scalar numWorkItemsStarted;
     Stats::Scalar numWorkItemsCompleted;
 

@@ -215,6 +215,25 @@ class System : public SimObject
 
     uint64_t init_param;
 
+    /*flag for grabage collection*/
+    bool gcFlag;
+    Tick gcstartTick;
+    Tick gcendTick;
+
+    void setgcFlag(bool flag){
+
+        gcFlag = flag;
+        if(flag){
+            gcstartTick = curTick();
+        } else {
+            gcendTick = curTick();
+        }
+    }
+
+    bool getgcFlag(){
+        return gcFlag;
+    }
+
     /** Port to physical memory used for writing object files into ram at
      * boot.*/
     PortProxy physProxy;

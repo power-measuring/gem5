@@ -75,6 +75,7 @@ CheckerCPU::CheckerCPU(Params *p)
     curMacroStaticInst = NULL;
 
     numInst = 0;
+    numInstgc = 0;
     startNumInst = 0;
     numLoad = 0;
     startNumLoad = 0;

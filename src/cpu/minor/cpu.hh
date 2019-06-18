@@ -140,6 +140,7 @@ class MinorCPU : public BaseCPU
 
     /** Simple inst count interface from BaseCPU */
     Counter totalInsts() const override;
+    Counter totalInstsgc() const override;
     Counter totalOps() const override;
 
     void serializeThread(CheckpointOut &cp, ThreadID tid) const override;

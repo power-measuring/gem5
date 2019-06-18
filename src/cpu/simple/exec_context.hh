@@ -81,6 +81,20 @@ class SimpleExecContext : public ExecContext {
     // Number of simulated instructions
     Counter numInst;
     Stats::Scalar numInsts;
+    // Number of simulated instructions during gc
+    Counter numInstgc;
+    Stats::Scalar numInstsgc;
+
+    /** Stat for the IPC per thread. */
+    Stats::Formula ipc;
+    /** Stat for the total IPC. */
+    Stats::Formula totalIpc;
+
+     /** Stat for the IPC per thread. */
+    Stats::Formula ipcgc;
+    /** Stat for the total IPC. */
+    Stats::Formula totalIpcgc;
+
     Counter numOp;
     Stats::Scalar numOps;
 
@@ -170,7 +184,7 @@ class SimpleExecContext : public ExecContext {
     /** Constructor */
     SimpleExecContext(BaseSimpleCPU* _cpu, SimpleThread* _thread)
         : cpu(_cpu), thread(_thread), fetchOffset(0), stayAtPC(false),
-        numInst(0), numOp(0), numLoad(0), lastIcacheStall(0), lastDcacheStall(0)
+        numInst(0),numInstgc(0), numOp(0), numLoad(0), lastIcacheStall(0), lastDcacheStall(0)
     { }
 
     /** Reads an integer register. */
