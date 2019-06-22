@@ -75,10 +75,15 @@ class CpuPowerOn(MathExprPowerModel):
     dyn = "voltage * (2 * ipc + " \
             "3 * 0.000000001 * dcache.overall_misses / sim_seconds)"
     st = "4 * temp"
+    dyn_gc = "voltage * (2 * ipcgc + " \
+            "3 * 0.000000001 * dcache.overall_misses_gc / sim_seconds_gc)"
+    st_gc = "4 * temp"
 
 class CpuPowerOff(MathExprPowerModel):
     dyn = "0"
     st = "0"
+    dyn_gc = "0"
+    st_gc = "0"
 
 class CpuPowerModel(PowerModel):
     pm = [

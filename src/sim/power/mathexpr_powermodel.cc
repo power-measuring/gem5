@@ -48,7 +48,8 @@
 #include "sim/sim_object.hh"
 
 MathExprPowerModel::MathExprPowerModel(const Params *p)
-    : PowerModelState(p), dyn_expr(p->dyn), st_expr(p->st), failed(false)
+    : PowerModelState(p), dyn_expr(p->dyn), st_expr(p->st),
+        dyn_expr_gc(p->dyn_gc), st_expr_gc(p->st_gc), failed(false)
 {
     // Calculate the name of the object we belong to
     std::vector<std::string> path;

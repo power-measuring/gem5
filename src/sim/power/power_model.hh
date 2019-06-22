@@ -66,14 +66,14 @@ class PowerModelState : public SimObject
      * @return Power (Watts) consumed by this object (dynamic component)
      */
     virtual double getDynamicPower() const = 0;
-
+    virtual double getDynamicPowerGc() const = 0;
     /**
      * Get the static power consumption.
      *
      * @return Power (Watts) consumed by this object (static component)
      */
     virtual double getStaticPower() const = 0;
-
+    virtual double getStaticPowerGc() const = 0;
     /**
      * Temperature update.
      *
@@ -97,10 +97,22 @@ class PowerModelState : public SimObject
           .name(params()->name + ".static_power")
           .desc("Static power for this object (Watts)")
         ;
+
+        dynamicPowerGc
+          .method(this, &PowerModelState::getDynamicPowerGc)
+          .name(params()->name + ".dynamic_power_gc")
+          .desc("Dynamic power during gc for this object (Watts)")
+        ;
+
+        staticPowerGc
+          .method(this, &PowerModelState::getStaticPowerGc)
+          .name(params()->name + ".static_power_gc")
+          .desc("Static power during gc for this object (Watts)")
+        ;
     }
 
   protected:
-    Stats::Value dynamicPower, staticPower;
+    Stats::Value dynamicPower, staticPower, dynamicPowerGc, staticPowerGc;
 
     /** Current temperature */
     double _temp;

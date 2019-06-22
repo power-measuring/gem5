@@ -67,6 +67,8 @@ class MathExprPowerModel : public PowerModelState
      * @return Power (Watts) consumed by this object (dynamic component)
      */
     double getDynamicPower() const { return eval(dyn_expr); }
+    
+    double getDynamicPowerGc() const { return eval(dyn_expr_gc); }
 
     /**
      * Get the static power consumption.
@@ -74,6 +76,8 @@ class MathExprPowerModel : public PowerModelState
      * @return Power (Watts) consumed by this object (static component)
      */
     double getStaticPower() const { return eval(st_expr); }
+
+    double getStaticPowerGc() const { return eval(st_expr_gc); }
 
     /**
      * Get the value for a variable (maps to a stat)
@@ -109,6 +113,9 @@ class MathExprPowerModel : public PowerModelState
 
     // Math expressions for dynamic and static power
     MathExpr dyn_expr, st_expr;
+
+    // Math expressions for dynamic and static power during gc
+    MathExpr dyn_expr_gc, st_expr_gc;
 
     // Basename of the object in the gem5 stats hierachy
     std::string basename;

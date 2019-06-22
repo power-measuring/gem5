@@ -50,3 +50,5 @@ class MathExprPowerModel(PowerModelState):
     # You may also use stat names (relative path to the simobject)
     dyn = Param.String("", "Expression for the dynamic power in Watts")
     st = Param.String("", "Expression for the static power in Watts")
+    dyn_gc = Param.String("", "Expression for the dynamic power during gc in Watts")
+    st_gc = Param.String("", "Expression for the static power during gc in Watts")
