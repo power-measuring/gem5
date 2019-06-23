@@ -122,6 +122,32 @@ PowerModel::getDynamicPower() const
 }
 
 double
+PowerModel::getDynamicPowerGc() const
+{
+    assert(clocked_object);
+
+    if (power_model_type == Enums::PMType::Static) {
+        // This power model only collects static data
+        return 0;
+    }
+    std::vector<double> w = clocked_object->pwrStateWeights();
+
+    // Same number of states (excluding UNDEFINED)
+    assert(w.size() - 1 == states_pm.size());
+
+    // Make sure we have no UNDEFINED state
+    warn_if(w[Enums::PwrState::UNDEFINED] > 0,
+        "SimObject in UNDEFINED power state! Power figures might be wrong!\n");
+
+    double power = 0;
+    for (unsigned i = 0; i < states_pm.size(); i++)
+        if (w[i + 1] > 0.0f)
+            power += states_pm[i]->getDynamicPowerGc() * w[i + 1];
+
+    return power;
+}
+
+double
 PowerModel::getStaticPower() const
 {
     assert(clocked_object);
@@ -148,6 +174,37 @@ PowerModel::getStaticPower() const
         // This fixes issues with NaNs and similar.
         if (w[i + 1] > 0.0f)
             power += states_pm[i]->getStaticPower() * w[i + 1];
+
+    return power;
+}
+
+double
+PowerModel::getStaticPowerGc() const
+{
+    assert(clocked_object);
+
+    std::vector<double> w = clocked_object->pwrStateWeights();
+
+    if (power_model_type == Enums::PMType::Dynamic) {
+        // This power model only collects dynamic data
+        return 0;
+    }
+
+    // Same number of states (excluding UNDEFINED)
+    assert(w.size() - 1 == states_pm.size());
+
+    // Make sure we have no UNDEFINED state
+    if (w[0] > 0)
+        warn("SimObject in UNDEFINED power state! "
+             "Power figures might be wrong!\n");
+
+    // We have N+1 states, being state #0 the default 'UNDEFINED' state
+    double power = 0;
+    for (unsigned i = 0; i < states_pm.size(); i++)
+        // Don't evaluate power if the object hasn't been in that state
+        // This fixes issues with NaNs and similar.
+        if (w[i + 1] > 0.0f)
+            power += states_pm[i]->getStaticPowerGc() * w[i + 1];
 
     return power;
 }

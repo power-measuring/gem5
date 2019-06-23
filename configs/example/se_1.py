@@ -73,11 +73,11 @@ class CpuPowerOn(MathExprPowerModel):
     # 2A per IPC, 3pA per cache miss
     # and then convert to Watt
     dyn = "voltage * (2 * ipc + " \
-            "3 * 0.000000001 * dcache.overall_misses / sim_seconds)"
-    st = "4 * temp"
+            "3 * 0.000000001 * dcache.overall_misses / sim_seconds) * sim_seconds"
+    st = "4 * temp * sim_seconds"
     dyn_gc = "voltage * (2 * ipcgc + " \
-            "3 * 0.000000001 * dcache.overall_misses_gc / sim_seconds_gc)"
-    st_gc = "4 * temp"
+            "3 * 0.000000001 * dcache.overall_misses_gc / sim_seconds_gc) * sim_seconds_gc"
+    st_gc = "4 * temp * sim_seconds_gc"
 
 class CpuPowerOff(MathExprPowerModel):
     dyn = "0"

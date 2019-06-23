@@ -140,6 +140,7 @@ class PowerModel : public SimObject
      * @return Power (Watts) consumed by this object (dynamic component)
      */
     double getDynamicPower() const;
+    double getDynamicPowerGc() const;
 
     /**
      * Get the static power consumption.
@@ -147,6 +148,7 @@ class PowerModel : public SimObject
      * @return Power (Watts) consumed by this object (static component)
      */
     double getStaticPower() const;
+    double getStaticPowerGc() const; 
 
     void regStats() {
         dynamicPower
@@ -159,6 +161,18 @@ class PowerModel : public SimObject
           .method(this, &PowerModel::getStaticPower)
           .name(params()->name + ".static_power")
           .desc("Static power for this power state")
+        ;
+
+        dynamicPowerGc
+          .method(this, &PowerModel::getDynamicPowerGc)
+          .name(params()->name + ".dynamic_power_gc")
+          .desc("Dynamic power during gc for this power state")
+        ;
+
+        staticPowerGc
+          .method(this, &PowerModel::getStaticPowerGc)
+          .name(params()->name + ".static_power_gc")
+          .desc("Static power during gc for this power state")
         ;
     }
 
@@ -186,7 +200,7 @@ class PowerModel : public SimObject
         PowerModel &pm;
     };
 
-    Stats::Value dynamicPower, staticPower;
+    Stats::Value dynamicPower, staticPower, dynamicPowerGc, staticPowerGc;
 
     /** Actual power models (one per power state) */
     std::vector<PowerModelState*> states_pm;
