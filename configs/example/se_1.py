@@ -69,15 +69,22 @@ from common.Caches import *
 from common.cpu2000 import *
 
 
+#calculating energy, not power
 class CpuPowerOn(MathExprPowerModel):
     # 2A per IPC, 3pA per cache miss
     # and then convert to Watt
-    dyn = "voltage * (2 * ipc + " \
-            "3 * 0.000000001 * dcache.overall_misses / sim_seconds) * sim_seconds"
-    st = "4 * temp * sim_seconds"
-    dyn_gc = "voltage * (2 * ipcgc + " \
-            "3 * 0.000000001 * dcache.overall_misses_gc / sim_seconds_gc) * sim_seconds_gc"
-    st_gc = "4 * temp * sim_seconds_gc"
+    # dyn = "voltage * (2 * ipc + " \
+    #        "3 * 0.000000001 * dcache.overall_misses / sim_seconds)"
+    # st = "4 * temp"
+    # dyn_gc = "voltage * (2 * ipcgc + " \
+    #         "3 * 0.000000001 * dcache.overall_misses_gc / sim_seconds_gc)"
+    # st_gc = "4 * temp"
+
+    dyn = "voltage * voltage * (0.19 * ipc + 1.64) * 10^(-9) * sim_freq / clock_period * sim_seconds"
+    st = " 1525.07 * (2.71828 ^ (-(1884.1 + 525.556 * voltage ^ (1/2)) / (237.15 + temp))) * voltage * voltage * sim_seconds"
+
+    dyn_gc = "voltage * voltage * (0.19 * ipcgc + 1.64) * 10^(-9) * sim_freq / clock_period * sim_seconds_gc"
+    st_gc = " 1525.07 * (2.71828 ^ (-(1884.1 + 525.556 * voltage ^ (1/2)) / (237.15 + temp))) * voltage * voltage * sim_seconds_gc"
 
 class CpuPowerOff(MathExprPowerModel):
     dyn = "0"
@@ -214,7 +221,7 @@ system.voltage_domain = VoltageDomain(voltage = options.sys_voltage)
 # Create a source clock for the system and set the clock period
 system.clk_domain = SrcClockDomain(clock =  options.sys_clock,
                                    voltage_domain = system.voltage_domain)
-
+print(options.sys_clock)
 # Create a CPU voltage domain
 system.cpu_voltage_domain = VoltageDomain()
 
@@ -222,7 +229,7 @@ system.cpu_voltage_domain = VoltageDomain()
 system.cpu_clk_domain = SrcClockDomain(clock = options.cpu_clock,
                                        voltage_domain =
                                        system.cpu_voltage_domain)
-
+print(options.cpu_clock)
 system.subsystem = SubSystem();
 
 # If elastic tracing is enabled, then configure the cpu and attach the elastic
@@ -277,7 +284,6 @@ for i in range(np):
         system.cpu[i].branchPred = bpClass()
 
     system.cpu[i].createThreads()
-
 if options.ruby:
     Ruby.create_system(options, False, system)
     assert(options.num_cpus == len(system.ruby._cpu_ports))

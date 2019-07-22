@@ -2,37 +2,18 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <data xmlns="http://www.netbeans.org/ns/make-project-private/1">
         <activeConfTypeElem>0</activeConfTypeElem>
-        <activeConfIndexElem>0</activeConfIndexElem>
+        <activeConfIndexElem>1</activeConfIndexElem>
     </data>
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/E:/power_measuring/gem5/src/cpu/base.hh</file>
-            <file>file:/E:/power_measuring/gem5/configs/common/MemConfig.py</file>
-            <file>file:/E:/power_measuring/gem5/ext/drampower/src/MemoryPowerModel.cc</file>
-            <file>file:/E:/power_measuring/gem5/src/sim/stats.hh</file>
-            <file>file:/E:/power_measuring/gem5/ext/drampower/src/libdrampower/LibDRAMPower.h</file>
-            <file>file:/E:/power_measuring/gem5/src/sim/system.cc</file>
             <file>file:/E:/power_measuring/gem5/src/sim/power/mathexpr_powermodel.cc</file>
-            <file>file:/E:/power_measuring/gem5/ext/drampower/src/libdrampower/LibDRAMPower.cc</file>
-            <file>file:/E:/power_measuring/gem5/src/mem/abstract_mem.hh</file>
-            <file>file:/E:/power_measuring/gem5/src/cpu/simple/base.hh</file>
-            <file>file:/E:/power_measuring/gem5/ext/drampower/src/MemoryPowerModel.h</file>
-            <file>file:/E:/power_measuring/gem5/src/sim/stat_control.cc</file>
-            <file>file:/E:/power_measuring/gem5/src/sim/power/power_model.cc</file>
-            <file>file:/E:/power_measuring/gem5/src/mem/dram_ctrl.cc</file>
-            <file>file:/E:/power_measuring/gem5/src/cpu/base.cc</file>
-            <file>file:/E:/power_measuring/gem5/src/sim/stat_register.cc</file>
-            <file>file:/E:/power_measuring/gem5/src/mem/drampower.cc</file>
-            <file>file:/E:/power_measuring/gem5/src/mem/DRAMCtrl.py</file>
-            <file>file:/E:/power_measuring/gem5/src/sim/system.hh</file>
-            <file>file:/E:/power_measuring/gem5/ext/drampower/src/Parameter.h</file>
             <file>file:/E:/power_measuring/gem5/src/sim/power/mathexpr_powermodel.hh</file>
-            <file>file:/E:/power_measuring/gem5/src/cpu/simple/base.cc</file>
-            <file>file:/E:/power_measuring/gem5/src/sim/ticked_object.cc</file>
+            <file>file:/E:/power_measuring/gem5/src/sim/mathexpr.hh</file>
+            <file>file:/E:/power_measuring/gem5/src/sim/power/PowerModel.py</file>
+            <file>file:/E:/power_measuring/gem5/configs/example/se_1.py</file>
             <file>file:/E:/power_measuring/gem5/src/sim/power/MathExprPowerModel.py</file>
-            <file>file:/E:/power_measuring/gem5/src/cpu/simple/exec_context.hh</file>
-            <file>file:/E:/power_measuring/gem5/src/sim/power/power_model.hh</file>
+            <file>file:/E:/power_measuring/gem5/src/sim/clock_domain.cc</file>
         </group>
     </open-files>
 </project-private>

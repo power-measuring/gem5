@@ -922,6 +922,10 @@ DRAMCtrl::accessAndRespond(PacketPtr pkt, Tick static_latency)
     // do the actual memory access which also turns the packet into a
     // response
     access(pkt);
+    
+    if(system()){
+        DPRINTF(DRAM, "From dram get system in abstract memory");
+    }
 
     // turn packet around to go back to requester if response expected
     if (needsResponse) {
@@ -2393,6 +2397,13 @@ DRAMCtrl::Rank::updatePowerStats()
 
     // Accumulate window energy into the total energy.
     totalEnergy += energy.window_energy * memory.devicesPerRank;
+    
+    if(memory.system()->getgcFlag()){
+        totalEnergyGc += energy.window_energy * memory.devicesPerRank;
+    } else {
+        totalEnergyGcNot += energy.window_energy * memory.devicesPerRank;
+    }
+    
     // Average power must not be accumulated but calculated over the time
     // since last stats reset. SimClock::Frequency is tick period not tick
     // frequency.
@@ -2400,6 +2411,12 @@ DRAMCtrl::Rank::updatePowerStats()
     // power (mW) = ----------- * ----------
     //              time (tick)   tick_frequency
     averagePower = (totalEnergy.value() /
+                    (curTick() - memory.lastStatsResetTick)) *
+                    (SimClock::Frequency / 1000000000.0);
+    averagePowerGc = (totalEnergyGc.value() /
+                    (curTick() - memory.lastStatsResetTick)) *
+                    (SimClock::Frequency / 1000000000.0);
+    averagePowerGcNot = (totalEnergyGcNot.value() /
                     (curTick() - memory.lastStatsResetTick)) *
                     (SimClock::Frequency / 1000000000.0);
 }
@@ -2485,10 +2502,26 @@ DRAMCtrl::Rank::regStats()
     totalEnergy
         .name(name() + ".totalEnergy")
         .desc("Total energy per rank (pJ)");
+    
+    totalEnergyGc
+        .name(name() + ".totalEnergyGc")
+        .desc("Total energy per rank (pJ) during gc");
+    
+    totalEnergyGcNot
+        .name(name() + ".totalEnergyGcNot")
+        .desc("Total energy per rank (pJ) not during gc");
 
     averagePower
         .name(name() + ".averagePower")
         .desc("Core power per rank (mW)");
+    
+    averagePowerGc
+        .name(name() + ".averagePowerGc")
+        .desc("Core power per rank (mW) during gc");
+    
+    averagePowerGcNot
+    .name(name() + ".averagePowerGcNot")
+    .desc("Core power per rank (mW) not during gc");
 
     totalIdleTime
         .name(name() + ".totalIdleTime")

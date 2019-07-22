@@ -107,7 +107,7 @@ SrcClockDomain::SrcClockDomain(const Params *p) :
              "is outside of list for Domain ID: %d\n", _perfLevel, _domainID);
 
     clockPeriod(freqOpPoints[_perfLevel]);
-
+    
     vdom->registerSrcClockDom(this);
 }
 

@@ -435,7 +435,7 @@ AbstractMemory::functionalAccess(PacketPtr pkt)
     assert(pkt->getAddrRange().isSubset(range));
 
     uint8_t *hostAddr = pmemAddr + pkt->getAddr() - range.start();
-
+   
     if (pkt->isRead()) {
         if (pmemAddr) {
             pkt->setData(hostAddr);
