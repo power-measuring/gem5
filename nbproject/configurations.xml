@@ -26644,9 +26644,9 @@
       <makefileType>
         <makeTool>
           <buildCommandWorkingDir>.</buildCommandWorkingDir>
-          <buildCommand>scons -j 20 build/ARM/gem5.opt</buildCommand>
+          <buildCommand>scons -j 20 build/X86/gem5.opt</buildCommand>
           <cleanCommand>${MAKE} clean</cleanCommand>
-          <executablePath></executablePath>
+          <executablePath>build\X86\gem5.opt</executablePath>
         </makeTool>
         <preBuild>
           <preBuildCommandWorkingDir>.</preBuildCommandWorkingDir>

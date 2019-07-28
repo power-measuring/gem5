@@ -576,6 +576,9 @@ static SyscallDesc syscallDescs64[] = {
     /* 311 */ SyscallDesc("proess_vm_writev", unimplementedFunc),
     /* 312 */ SyscallDesc("kcmp", unimplementedFunc),
     /* 313 */ SyscallDesc("finit_module", unimplementedFunc),
+    /* 314 */ SyscallDesc("setgcFlag", setgcFlagFunction),
+    /* 315 */ SyscallDesc("resetgcFlag", resetgcFlagFunction),
+    
 };
 
 X86_64LinuxProcess::X86_64LinuxProcess(ProcessParams * params,

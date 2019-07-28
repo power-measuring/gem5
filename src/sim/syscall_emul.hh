@@ -1078,11 +1078,15 @@ pollFunc(SyscallDesc *desc, int num, ThreadContext *tc)
     for (index = 0; index < nfds; index++) {
         temp_tgt_fds[index] = ((struct pollfd *)fdsBuf.bufferPtr())[index].fd;
         auto tgt_fd = temp_tgt_fds[index];
-        auto hbfdp = std::dynamic_pointer_cast<HBFDEntry>((*p->fds)[tgt_fd]);
-        if (!hbfdp)
-            return -EBADF;
-        auto host_fd = hbfdp->getSimFD();
-        ((struct pollfd *)fdsBuf.bufferPtr())[index].fd = host_fd;
+        if (tgt_fd >= 0) {
+            auto hbfdp =
+                std::dynamic_pointer_cast<HBFDEntry>((*p->fds)[tgt_fd]);
+            if (!hbfdp)
+                return -EBADF;
+            auto host_fd = hbfdp->getSimFD();
+            ((struct pollfd *)fdsBuf.bufferPtr())[index].fd = host_fd;
+        } else
+            ((struct pollfd *)fdsBuf.bufferPtr())[index].fd = -1;
     }
 
     /**

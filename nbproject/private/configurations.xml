@@ -10257,6 +10257,8 @@
         <gdb_interceptlist>
           <gdbinterceptoptions gdb_all="false" gdb_unhandled="true" gdb_unexpected="true"/>
         </gdb_interceptlist>
+        <gdb_signals>
+        </gdb_signals>
         <gdb_options>
           <DebugOptions>
           </DebugOptions>
@@ -10269,9 +10271,12 @@
       <runprofile version="9">
         <runcommandpicklist>
           <runcommandpicklistitem>"${OUTPUT_PATH}"</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" ~/tuvtester</runcommandpicklistitem>
           <runcommandpicklistitem>"${OUTPUT_PATH}" configs/example/se_1.py -c ~/syscalltest/mujs -o "/home/qy/richard.js" --cpu-type="TimingSimpleCPU" --caches --cpu-clock="200MHz"</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" configs/example/se_1.py -c ~/syscalltest/mujs -o "/home/qy/simpletest.js" --cpu-type="TimingSimpleCPU" --caches --cpu-clock="200MHz"</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" configs/example/se_1.py -c ~/tuvtester --cpu-type="TimingSimpleCPU" --caches --cpu-clock="200MHz"</runcommandpicklistitem>
         </runcommandpicklist>
-        <runcommand>"${OUTPUT_PATH}" configs/example/se_1.py -c ~/syscalltest/mujs -o "/home/qy/richard.js" --cpu-type="TimingSimpleCPU" --caches --cpu-clock="200MHz"</runcommand>
+        <runcommand>"${OUTPUT_PATH}" configs/example/se_1.py -c ~/tuvtester --cpu-type="TimingSimpleCPU" --caches --cpu-clock="200MHz"</runcommand>
         <rundir></rundir>
         <buildfirst>false</buildfirst>
         <terminal-type>0</terminal-type>

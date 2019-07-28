@@ -600,6 +600,13 @@ BaseKvmCPU::totalInsts() const
     return ctrInsts;
 }
 
+/////////////////
+Counter
+BaseKvmCPU::totalInstsgc() const
+{
+    return 0;
+}
+
 Counter
 BaseKvmCPU::totalOps() const
 {
