@@ -2375,6 +2375,8 @@ socketFunc(SyscallDesc *desc, int num, ThreadContext *tc)
         return -errno;
 
     auto sfdp = std::make_shared<SocketFDEntry>(sim_fd, domain, type, prot);
+    sfdp->setFlags(type & OS::TGT_O_NONBLOCK);
+    sfdp->setCOE((type & OS::TGT_O_CLOEXEC) == OS::TGT_O_CLOEXEC);
     int tgt_fd = p->fds->allocFD(sfdp);
 
     return tgt_fd;
@@ -2399,8 +2401,12 @@ socketpairFunc(SyscallDesc *desc, int num, ThreadContext *tc)
     int *fds = (int *)svBuf.bufferPtr();
 
     auto sfdp1 = std::make_shared<SocketFDEntry>(fds[0], domain, type, prot);
+    sfdp1->setFlags(type & OS::TGT_O_NONBLOCK);
+    sfdp1->setCOE((type & OS::TGT_O_CLOEXEC) == OS::TGT_O_CLOEXEC);
     fds[0] = p->fds->allocFD(sfdp1);
     auto sfdp2 = std::make_shared<SocketFDEntry>(fds[1], domain, type, prot);
+    sfdp2->setFlags(type & OS::TGT_O_NONBLOCK);
+    sfdp2->setCOE((type & OS::TGT_O_CLOEXEC) == OS::TGT_O_CLOEXEC);
     fds[1] = p->fds->allocFD(sfdp2);
     svBuf.copyOut(tc->getVirtProxy());
 
