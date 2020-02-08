@@ -60,7 +60,10 @@ uint64_t m5_write_file(void *buffer, uint64_t len, uint64_t offset,
                        const char *filename);
 void m5_debug_break(void);
 void m5_switch_cpu(void);
+void m5_ctrl_flag(uint64_t flag_num, uint64_t flag_value);
 void m5_dist_toggle_sync(void);
+void m5_test_inst1();
+void m5_test_inst2();
 void m5_add_symbol(uint64_t addr, char *symbol);
 void m5_load_symbol();
 void m5_panic(void);

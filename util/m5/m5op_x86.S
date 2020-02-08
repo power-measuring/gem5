@@ -75,6 +75,16 @@ name:                                     \
 
 #endif
 
+#define TWO_BYTE_MYOP(name, number, modrm, imm)	\
+        .global name;			\
+        .func name;			\
+name:					\
+        .byte 0x0F, number;		\
+        .byte modrm;			\
+        .byte imm;			\
+        ret;				\
+        .endfunc;
+
 TWO_BYTE_OP(m5_arm, M5OP_ARM)
 TWO_BYTE_OP(m5_quiesce, M5OP_QUIESCE)
 TWO_BYTE_OP(m5_quiesce_ns, M5OP_QUIESCE_NS)
@@ -94,8 +104,11 @@ TWO_BYTE_OP(m5_read_file, M5OP_READ_FILE)
 TWO_BYTE_OP(m5_write_file, M5OP_WRITE_FILE)
 TWO_BYTE_OP(m5_debug_break, M5OP_DEBUG_BREAK)
 TWO_BYTE_OP(m5_switch_cpu, M5OP_SWITCH_CPU)
+//TWO_BYTE_OP(m5_ctrl_flag, M5OP_CTRL_FLAG)
 TWO_BYTE_OP(m5_add_symbol, M5OP_ADD_SYMBOL)
 TWO_BYTE_OP(m5_panic, M5OP_PANIC)
 TWO_BYTE_OP(m5_work_begin, M5OP_WORK_BEGIN)
 TWO_BYTE_OP(m5_work_end, M5OP_WORK_END)
 TWO_BYTE_OP(m5_dist_toggle_sync, M5OP_DIST_TOGGLE_SYNC)
+TWO_BYTE_MYOP(m5_test_inst1, M5OP_TEST_INST, 1 << 3, 0)
+TWO_BYTE_MYOP(m5_test_inst2, M5OP_TEST_INST, 2 << 3, 1)

@@ -765,6 +765,62 @@
             0x3: Inst::BT(Ev,Gv);
             0x4: Inst::SHLD(Ev,Gv,Ib);
             0x5: Inst::SHLD(Ev,Gv);
+            0x6: decode MODRM_REG {
+                format BasicOperate {
+                    0x00: decode IMMEDIATE {
+                        0x00: m5testinst0({{
+                            PseudoInst::testinst(xc->tcBase(), 0, 0);
+                        }}, IsNonSpeculative);
+                        0x01: m5testinst1({{
+                            PseudoInst::testinst(xc->tcBase(), 1, 0);
+                        }}, IsNonSpeculative);
+                        0x02: m5testinst2({{
+                            PseudoInst::testinst(xc->tcBase(), 2, 0);
+                        }}, IsNonSpeculative);
+                        0x03: m5testinst3({{
+                            PseudoInst::testinst(xc->tcBase(), 3, 0);
+                        }}, IsNonSpeculative);
+                        0x04: m5testinst4({{
+                            PseudoInst::testinst(xc->tcBase(), 4, 0);
+                        }}, IsNonSpeculative);
+                        0x05: m5testinst5({{
+                            PseudoInst::testinst(xc->tcBase(), 5, 0);
+                        }}, IsNonSpeculative);
+                        0x06: m5testinst6({{
+                            PseudoInst::testinst(xc->tcBase(), 6, 0);
+                        }}, IsNonSpeculative);
+                        0x07: m5testinst7({{
+                            PseudoInst::testinst(xc->tcBase(), 7, 0);
+                        }}, IsNonSpeculative);
+                    }
+                    0x01: decode IMMEDIATE {
+                        0x00: m5testinst8({{
+                            PseudoInst::testinst(xc->tcBase(), 0, 1);
+                        }}, IsNonSpeculative);
+                        0x01: m5testinst9({{
+                            PseudoInst::testinst(xc->tcBase(), 1, 1);
+                        }}, IsNonSpeculative);
+                        0x02: m5testinst10({{
+                            PseudoInst::testinst(xc->tcBase(), 2, 1);
+                        }}, IsNonSpeculative);
+                        0x03: m5testinst11({{
+                            PseudoInst::testinst(xc->tcBase(), 3, 1);
+                        }}, IsNonSpeculative);
+                        0x04: m5testinst12({{
+                            PseudoInst::testinst(xc->tcBase(), 4, 1);
+                        }}, IsNonSpeculative);
+                        0x05: m5testinst13({{
+                            PseudoInst::testinst(xc->tcBase(), 5, 1);
+                        }}, IsNonSpeculative);
+                        0x06: m5testinst14({{
+                            PseudoInst::testinst(xc->tcBase(), 6, 1);
+                        }}, IsNonSpeculative);
+                        0x07: m5testinst15({{
+                            PseudoInst::testinst(xc->tcBase(), 7, 1);
+                        }}, IsNonSpeculative);
+                    }
+                }
+            }
             default: Inst::UD2();
         }
         0x15: decode OPCODE_OP_BOTTOM3 {

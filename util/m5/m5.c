@@ -177,6 +177,18 @@ do_exit(int argc, char *argv[])
 }
 
 void
+do_test_inst(int argc, char *argv[])
+{
+    uint64_t arg;
+    parse_int_args(argc, argv, &arg, 1);
+    if (arg == 1)
+            m5_test_inst1();
+    else if (arg == 2)
+            m5_test_inst2();
+    else fputs("parse error!", stderr);
+}
+
+void
 do_fail(int argc, char *argv[])
 {
     if (argc < 1 || argc > 2)
@@ -352,6 +364,7 @@ struct MainFunc mainfuncs[] = {
     { "initparam",      do_initparam,        "[key] // key must be shorter"
                                              " than 16 chars" },
     { "sw99param",      do_sw99param,        "" },
+    { "testinst",	do_test_inst,	     "" },
 #ifdef linux
     { "pin",            do_pin,              "<cpu> <program> [args ...]" }
 #endif

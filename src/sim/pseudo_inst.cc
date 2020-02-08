@@ -47,6 +47,7 @@
 #include <unistd.h>
 
 #include <cerrno>
+#include <cstdio>
 #include <fstream>
 #include <string>
 #include <vector>
@@ -227,6 +228,18 @@ pseudoInst(ThreadContext *tc, uint8_t func, uint8_t subfunc)
     return 0;
 }
 
+
+void
+testinst(ThreadContext *tc, uint64_t tag, uint64_t flag)
+{
+    //DPRINTF(PseudoInst, "PseudoInst::testinst()\n");
+    printf("testinst tag %d, flag %d called!!!!!\n", (int)tag, (int)flag);
+
+    System *sys = tc->getSystemPtr();
+
+    sys->setFlag(tag, flag);
+}
+
 void
 arm(ThreadContext *tc)
 {
@@ -389,16 +402,16 @@ addsymbol(ThreadContext *tc, Addr addr, Addr symbolAddr)
 uint64_t
 initParam(ThreadContext *tc, uint64_t key_str1, uint64_t key_str2)
 {
-    DPRINTF(PseudoInst, "PseudoInst::initParam() key:%s%s\n", (char *)&key_str1,
-            (char *)&key_str2);
+    DPRINTF(PseudoInst, "PseudoInst::initParam() key:%s%s\n",
+                    (char *)&key_str1, (char *)&key_str2);
     if (!FullSystem) {
         panicFsOnlyPseudoInst("initParam");
         return 0;
     }
 
     // The key parameter string is passed in via two 64-bit registers. We copy
-    // out the characters from the 64-bit integer variables here and concatenate
-    // them in the key_str character buffer
+    // out the characters from the 64-bit integer variables here and
+    // concatenate them in the key_str character buffer
     const int len = 2 * sizeof(uint64_t) + 1;
     char key_str[len];
     memset(key_str, '\0', len);
@@ -585,6 +598,16 @@ switchcpu(ThreadContext *tc)
     DPRINTF(PseudoInst, "PseudoInst::switchcpu()\n");
     exitSimLoop("switchcpu");
 }
+
+
+void
+ctrl_flag(ThreadContext *tc, uint64_t flag_num, uint64_t flag_value)
+{
+    System *sys = tc->getSystemPtr();
+
+    sys->setFlag(flag_num, flag_value);
+}
+
 
 void
 togglesync(ThreadContext *tc)
