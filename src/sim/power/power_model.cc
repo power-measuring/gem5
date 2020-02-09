@@ -148,6 +148,214 @@ PowerModel::getDynamicPowerGc() const
 }
 
 double
+PowerModel::getDynamicPower_0() const
+{
+    assert(clocked_object);
+
+    if (power_model_type == Enums::PMType::Static) {
+        // This power model only collects static data
+        return 0;
+    }
+    std::vector<double> w = clocked_object->pwrStateWeights();
+
+    // Same number of states (excluding UNDEFINED)
+    assert(w.size() - 1 == states_pm.size());
+
+    // Make sure we have no UNDEFINED state
+    warn_if(w[Enums::PwrState::UNDEFINED] > 0,
+        "SimObject in UNDEFINED power state! Power figures might be wrong!\n");
+
+    double power = 0;
+    for (unsigned i = 0; i < states_pm.size(); i++)
+        if (w[i + 1] > 0.0f)
+            power += states_pm[i]->getDynamicPower_0() * w[i + 1];
+
+    return power;
+}
+
+double
+PowerModel::getDynamicPower_1() const
+{
+    assert(clocked_object);
+
+    if (power_model_type == Enums::PMType::Static) {
+        // This power model only collects static data
+        return 0;
+    }
+    std::vector<double> w = clocked_object->pwrStateWeights();
+
+    // Same number of states (excluding UNDEFINED)
+    assert(w.size() - 1 == states_pm.size());
+
+    // Make sure we have no UNDEFINED state
+    warn_if(w[Enums::PwrState::UNDEFINED] > 0,
+        "SimObject in UNDEFINED power state! Power figures might be wrong!\n");
+
+    double power = 0;
+    for (unsigned i = 0; i < states_pm.size(); i++)
+        if (w[i + 1] > 0.0f)
+            power += states_pm[i]->getDynamicPower_1() * w[i + 1];
+
+    return power;
+}
+
+double
+PowerModel::getDynamicPower_2() const
+{
+    assert(clocked_object);
+
+    if (power_model_type == Enums::PMType::Static) {
+        // This power model only collects static data
+        return 0;
+    }
+    std::vector<double> w = clocked_object->pwrStateWeights();
+
+    // Same number of states (excluding UNDEFINED)
+    assert(w.size() - 1 == states_pm.size());
+
+    // Make sure we have no UNDEFINED state
+    warn_if(w[Enums::PwrState::UNDEFINED] > 0,
+        "SimObject in UNDEFINED power state! Power figures might be wrong!\n");
+
+    double power = 0;
+    for (unsigned i = 0; i < states_pm.size(); i++)
+        if (w[i + 1] > 0.0f)
+            power += states_pm[i]->getDynamicPower_2() * w[i + 1];
+
+    return power;
+}
+
+double
+PowerModel::getDynamicPower_3() const
+{
+    assert(clocked_object);
+
+    if (power_model_type == Enums::PMType::Static) {
+        // This power model only collects static data
+        return 0;
+    }
+    std::vector<double> w = clocked_object->pwrStateWeights();
+
+    // Same number of states (excluding UNDEFINED)
+    assert(w.size() - 1 == states_pm.size());
+
+    // Make sure we have no UNDEFINED state
+    warn_if(w[Enums::PwrState::UNDEFINED] > 0,
+        "SimObject in UNDEFINED power state! Power figures might be wrong!\n");
+
+    double power = 0;
+    for (unsigned i = 0; i < states_pm.size(); i++)
+        if (w[i + 1] > 0.0f)
+            power += states_pm[i]->getDynamicPower_3() * w[i + 1];
+
+    return power;
+}
+
+double
+PowerModel::getDynamicPower_4() const
+{
+    assert(clocked_object);
+
+    if (power_model_type == Enums::PMType::Static) {
+        // This power model only collects static data
+        return 0;
+    }
+    std::vector<double> w = clocked_object->pwrStateWeights();
+
+    // Same number of states (excluding UNDEFINED)
+    assert(w.size() - 1 == states_pm.size());
+
+    // Make sure we have no UNDEFINED state
+    warn_if(w[Enums::PwrState::UNDEFINED] > 0,
+        "SimObject in UNDEFINED power state! Power figures might be wrong!\n");
+
+    double power = 0;
+    for (unsigned i = 0; i < states_pm.size(); i++)
+        if (w[i + 1] > 0.0f)
+            power += states_pm[i]->getDynamicPower_4() * w[i + 1];
+
+    return power;
+}
+
+double
+PowerModel::getDynamicPower_5() const
+{
+    assert(clocked_object);
+
+    if (power_model_type == Enums::PMType::Static) {
+        // This power model only collects static data
+        return 0;
+    }
+    std::vector<double> w = clocked_object->pwrStateWeights();
+
+    // Same number of states (excluding UNDEFINED)
+    assert(w.size() - 1 == states_pm.size());
+
+    // Make sure we have no UNDEFINED state
+    warn_if(w[Enums::PwrState::UNDEFINED] > 0,
+        "SimObject in UNDEFINED power state! Power figures might be wrong!\n");
+
+    double power = 0;
+    for (unsigned i = 0; i < states_pm.size(); i++)
+        if (w[i + 1] > 0.0f)
+            power += states_pm[i]->getDynamicPower_5() * w[i + 1];
+
+    return power;
+}
+
+double
+PowerModel::getDynamicPower_6() const
+{
+    assert(clocked_object);
+
+    if (power_model_type == Enums::PMType::Static) {
+        // This power model only collects static data
+        return 0;
+    }
+    std::vector<double> w = clocked_object->pwrStateWeights();
+
+    // Same number of states (excluding UNDEFINED)
+    assert(w.size() - 1 == states_pm.size());
+
+    // Make sure we have no UNDEFINED state
+    warn_if(w[Enums::PwrState::UNDEFINED] > 0,
+        "SimObject in UNDEFINED power state! Power figures might be wrong!\n");
+
+    double power = 0;
+    for (unsigned i = 0; i < states_pm.size(); i++)
+        if (w[i + 1] > 0.0f)
+            power += states_pm[i]->getDynamicPower_6() * w[i + 1];
+
+    return power;
+}
+
+double
+PowerModel::getDynamicPower_7() const
+{
+    assert(clocked_object);
+
+    if (power_model_type == Enums::PMType::Static) {
+        // This power model only collects static data
+        return 0;
+    }
+    std::vector<double> w = clocked_object->pwrStateWeights();
+
+    // Same number of states (excluding UNDEFINED)
+    assert(w.size() - 1 == states_pm.size());
+
+    // Make sure we have no UNDEFINED state
+    warn_if(w[Enums::PwrState::UNDEFINED] > 0,
+        "SimObject in UNDEFINED power state! Power figures might be wrong!\n");
+
+    double power = 0;
+    for (unsigned i = 0; i < states_pm.size(); i++)
+        if (w[i + 1] > 0.0f)
+            power += states_pm[i]->getDynamicPower_7() * w[i + 1];
+
+    return power;
+}
+
+double
 PowerModel::getStaticPower() const
 {
     assert(clocked_object);
@@ -205,6 +413,254 @@ PowerModel::getStaticPowerGc() const
         // This fixes issues with NaNs and similar.
         if (w[i + 1] > 0.0f)
             power += states_pm[i]->getStaticPowerGc() * w[i + 1];
+
+    return power;
+}
+
+double
+PowerModel::getStaticPower_0() const
+{
+    assert(clocked_object);
+
+    std::vector<double> w = clocked_object->pwrStateWeights();
+
+    if (power_model_type == Enums::PMType::Dynamic) {
+        // This power model only collects dynamic data
+        return 0;
+    }
+
+    // Same number of states (excluding UNDEFINED)
+    assert(w.size() - 1 == states_pm.size());
+
+    // Make sure we have no UNDEFINED state
+    if (w[0] > 0)
+        warn("SimObject in UNDEFINED power state! "
+             "Power figures might be wrong!\n");
+
+    // We have N+1 states, being state #0 the default 'UNDEFINED' state
+    double power = 0;
+    for (unsigned i = 0; i < states_pm.size(); i++)
+        // Don't evaluate power if the object hasn't been in that state
+        // This fixes issues with NaNs and similar.
+        if (w[i + 1] > 0.0f)
+            power += states_pm[i]->getStaticPower_0() * w[i + 1];
+
+    return power;
+}
+
+double
+PowerModel::getStaticPower_1() const
+{
+    assert(clocked_object);
+
+    std::vector<double> w = clocked_object->pwrStateWeights();
+
+    if (power_model_type == Enums::PMType::Dynamic) {
+        // This power model only collects dynamic data
+        return 0;
+    }
+
+    // Same number of states (excluding UNDEFINED)
+    assert(w.size() - 1 == states_pm.size());
+
+    // Make sure we have no UNDEFINED state
+    if (w[0] > 0)
+        warn("SimObject in UNDEFINED power state! "
+             "Power figures might be wrong!\n");
+
+    // We have N+1 states, being state #0 the default 'UNDEFINED' state
+    double power = 0;
+    for (unsigned i = 0; i < states_pm.size(); i++)
+        // Don't evaluate power if the object hasn't been in that state
+        // This fixes issues with NaNs and similar.
+        if (w[i + 1] > 0.0f)
+            power += states_pm[i]->getStaticPower_1() * w[i + 1];
+
+    return power;
+}
+
+double
+PowerModel::getStaticPower_2() const
+{
+    assert(clocked_object);
+
+    std::vector<double> w = clocked_object->pwrStateWeights();
+
+    if (power_model_type == Enums::PMType::Dynamic) {
+        // This power model only collects dynamic data
+        return 0;
+    }
+
+    // Same number of states (excluding UNDEFINED)
+    assert(w.size() - 1 == states_pm.size());
+
+    // Make sure we have no UNDEFINED state
+    if (w[0] > 0)
+        warn("SimObject in UNDEFINED power state! "
+             "Power figures might be wrong!\n");
+
+    // We have N+1 states, being state #0 the default 'UNDEFINED' state
+    double power = 0;
+    for (unsigned i = 0; i < states_pm.size(); i++)
+        // Don't evaluate power if the object hasn't been in that state
+        // This fixes issues with NaNs and similar.
+        if (w[i + 1] > 0.0f)
+            power += states_pm[i]->getStaticPower_2() * w[i + 1];
+
+    return power;
+}
+
+double
+PowerModel::getStaticPower_3() const
+{
+    assert(clocked_object);
+
+    std::vector<double> w = clocked_object->pwrStateWeights();
+
+    if (power_model_type == Enums::PMType::Dynamic) {
+        // This power model only collects dynamic data
+        return 0;
+    }
+
+    // Same number of states (excluding UNDEFINED)
+    assert(w.size() - 1 == states_pm.size());
+
+    // Make sure we have no UNDEFINED state
+    if (w[0] > 0)
+        warn("SimObject in UNDEFINED power state! "
+             "Power figures might be wrong!\n");
+
+    // We have N+1 states, being state #0 the default 'UNDEFINED' state
+    double power = 0;
+    for (unsigned i = 0; i < states_pm.size(); i++)
+        // Don't evaluate power if the object hasn't been in that state
+        // This fixes issues with NaNs and similar.
+        if (w[i + 1] > 0.0f)
+            power += states_pm[i]->getStaticPower_3() * w[i + 1];
+
+    return power;
+}
+
+double
+PowerModel::getStaticPower_4() const
+{
+    assert(clocked_object);
+
+    std::vector<double> w = clocked_object->pwrStateWeights();
+
+    if (power_model_type == Enums::PMType::Dynamic) {
+        // This power model only collects dynamic data
+        return 0;
+    }
+
+    // Same number of states (excluding UNDEFINED)
+    assert(w.size() - 1 == states_pm.size());
+
+    // Make sure we have no UNDEFINED state
+    if (w[0] > 0)
+        warn("SimObject in UNDEFINED power state! "
+             "Power figures might be wrong!\n");
+
+    // We have N+1 states, being state #0 the default 'UNDEFINED' state
+    double power = 0;
+    for (unsigned i = 0; i < states_pm.size(); i++)
+        // Don't evaluate power if the object hasn't been in that state
+        // This fixes issues with NaNs and similar.
+        if (w[i + 1] > 0.0f)
+            power += states_pm[i]->getStaticPower_4() * w[i + 1];
+
+    return power;
+}
+
+double
+PowerModel::getStaticPower_5() const
+{
+    assert(clocked_object);
+
+    std::vector<double> w = clocked_object->pwrStateWeights();
+
+    if (power_model_type == Enums::PMType::Dynamic) {
+        // This power model only collects dynamic data
+        return 0;
+    }
+
+    // Same number of states (excluding UNDEFINED)
+    assert(w.size() - 1 == states_pm.size());
+
+    // Make sure we have no UNDEFINED state
+    if (w[0] > 0)
+        warn("SimObject in UNDEFINED power state! "
+             "Power figures might be wrong!\n");
+
+    // We have N+1 states, being state #0 the default 'UNDEFINED' state
+    double power = 0;
+    for (unsigned i = 0; i < states_pm.size(); i++)
+        // Don't evaluate power if the object hasn't been in that state
+        // This fixes issues with NaNs and similar.
+        if (w[i + 1] > 0.0f)
+            power += states_pm[i]->getStaticPower_5() * w[i + 1];
+
+    return power;
+}
+
+double
+PowerModel::getStaticPower_6() const
+{
+    assert(clocked_object);
+
+    std::vector<double> w = clocked_object->pwrStateWeights();
+
+    if (power_model_type == Enums::PMType::Dynamic) {
+        // This power model only collects dynamic data
+        return 0;
+    }
+
+    // Same number of states (excluding UNDEFINED)
+    assert(w.size() - 1 == states_pm.size());
+
+    // Make sure we have no UNDEFINED state
+    if (w[0] > 0)
+        warn("SimObject in UNDEFINED power state! "
+             "Power figures might be wrong!\n");
+
+    // We have N+1 states, being state #0 the default 'UNDEFINED' state
+    double power = 0;
+    for (unsigned i = 0; i < states_pm.size(); i++)
+        // Don't evaluate power if the object hasn't been in that state
+        // This fixes issues with NaNs and similar.
+        if (w[i + 1] > 0.0f)
+            power += states_pm[i]->getStaticPower_6() * w[i + 1];
+
+    return power;
+}
+
+double
+PowerModel::getStaticPower_7() const
+{
+    assert(clocked_object);
+
+    std::vector<double> w = clocked_object->pwrStateWeights();
+
+    if (power_model_type == Enums::PMType::Dynamic) {
+        // This power model only collects dynamic data
+        return 0;
+    }
+
+    // Same number of states (excluding UNDEFINED)
+    assert(w.size() - 1 == states_pm.size());
+
+    // Make sure we have no UNDEFINED state
+    if (w[0] > 0)
+        warn("SimObject in UNDEFINED power state! "
+             "Power figures might be wrong!\n");
+
+    // We have N+1 states, being state #0 the default 'UNDEFINED' state
+    double power = 0;
+    for (unsigned i = 0; i < states_pm.size(); i++)
+        // Don't evaluate power if the object hasn't been in that state
+        // This fixes issues with NaNs and similar.
+        if (w[i + 1] > 0.0f)
+            power += states_pm[i]->getStaticPower_7() * w[i + 1];
 
     return power;
 }

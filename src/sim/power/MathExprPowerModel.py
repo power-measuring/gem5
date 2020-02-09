@@ -50,5 +50,49 @@ class MathExprPowerModel(PowerModelState):
     # You may also use stat names (relative path to the simobject)
     dyn = Param.String("", "Expression for the dynamic power in Watts")
     st = Param.String("", "Expression for the static power in Watts")
-    dyn_gc = Param.String("", "Expression for the dynamic power during gc in Watts")
-    st_gc = Param.String("", "Expression for the static power during gc in Watts")
+    dyn_gc = Param.String("", "Expression for the dynamic power" \
+            " during gc in Watts")
+    st_gc = Param.String("", "Expression for the static power" \
+            " during gc in Watts")
+
+    dyn_stage_0 = Param.String("", "Expression for the dynamic" \
+            " power during this stage in Watts")
+    st_stage_0 = Param.String("", "Expression for the static power" \
+            " during this stage in Watts")
+
+    dyn_stage_1 = Param.String("", "Expression for the dynamic power" \
+            " during this stage in Watts")
+    st_stage_1 = Param.String("", "Expression for the static power" \
+            " during this stage in Watts")
+
+    dyn_stage_2 = Param.String("", "Expression for the dynamic power" \
+            " during this stage in Watts")
+    st_stage_2 = Param.String("", "Expression for the static power" \
+            " during this stage in Watts")
+
+    dyn_stage_3 = Param.String("", "Expression for the dynamic power" \
+            " during this stage in Watts")
+    st_stage_3 = Param.String("", "Expression for the static power" \
+            " during this stage in Watts")
+
+    dyn_stage_4 = Param.String("", "Expression for the dynamic power" \
+            " during this stage in Watts")
+    st_stage_4 = Param.String("", "Expression for the static power" \
+            " during this stage in Watts")
+
+    dyn_stage_5 = Param.String("", "Expression for the dynamic power" \
+            " during this stage in Watts")
+    st_stage_5 = Param.String("", "Expression for the static power " \
+            "during this stage in Watts")
+
+    dyn_stage_6 = Param.String("", "Expression for the dynamic power" \
+            " during this stage in Watts")
+    st_stage_6 = Param.String("", "Expression for the static power" \
+            " during this stage in Watts")
+
+    dyn_stage_7 = Param.String("", "Expression for the dynamic power" \
+            " during this stage in Watts")
+    st_stage_7 = Param.String("", "Expression for the static power " \
+            "during this stage in Watts")
+
+

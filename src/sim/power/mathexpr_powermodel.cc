@@ -49,7 +49,15 @@
 
 MathExprPowerModel::MathExprPowerModel(const Params *p)
     : PowerModelState(p), dyn_expr(p->dyn), st_expr(p->st),
-        dyn_expr_gc(p->dyn_gc), st_expr_gc(p->st_gc), failed(false)
+        dyn_expr_gc(p->dyn_gc), st_expr_gc(p->st_gc),
+        dyn_expr_0(p->dyn_stage_0), st_expr_0(p->st_stage_0),
+        dyn_expr_1(p->dyn_stage_1), st_expr_1(p->st_stage_1),
+        dyn_expr_2(p->dyn_stage_2), st_expr_2(p->st_stage_2),
+        dyn_expr_3(p->dyn_stage_3), st_expr_3(p->st_stage_3),
+        dyn_expr_4(p->dyn_stage_4), st_expr_4(p->st_stage_4),
+        dyn_expr_5(p->dyn_stage_5), st_expr_5(p->st_stage_5),
+        dyn_expr_6(p->dyn_stage_6), st_expr_6(p->st_stage_6),
+        dyn_expr_7(p->dyn_stage_7), st_expr_7(p->st_stage_7), failed(false)
 {
     // Calculate the name of the object we belong to
     std::vector<std::string> path;
@@ -58,6 +66,8 @@ MathExprPowerModel::MathExprPowerModel(const Params *p)
     assert(path.size() > 2);
     for (unsigned i = 0; i < path.size() - 2; i++)
         basename += path[i] + ".";
+
+
 }
 
 void

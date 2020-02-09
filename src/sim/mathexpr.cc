@@ -63,6 +63,8 @@ MathExpr::MathExpr(std::string expr)
     expr.erase(remove_if(expr.begin(), expr.end(), isspace), expr.end());
 
     root = MathExpr::parse(expr);
+    if (!root)
+        panic(expr);
     panic_if(!root, "Invalid expression\n");
 }
 

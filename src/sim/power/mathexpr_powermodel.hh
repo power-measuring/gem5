@@ -70,6 +70,22 @@ class MathExprPowerModel : public PowerModelState
     
     double getDynamicPowerGc() const { return eval(dyn_expr_gc); }
 
+    double getDynamicPower_0() const { return eval(dyn_expr_0); }
+
+    double getDynamicPower_1() const { return eval(dyn_expr_1); }
+
+    double getDynamicPower_2() const { return eval(dyn_expr_2); }
+
+    double getDynamicPower_3() const { return eval(dyn_expr_3); }
+
+    double getDynamicPower_4() const { return eval(dyn_expr_4); }
+
+    double getDynamicPower_5() const { return eval(dyn_expr_5); }
+
+    double getDynamicPower_6() const { return eval(dyn_expr_6); }
+
+    double getDynamicPower_7() const { return eval(dyn_expr_7); }
+
     /**
      * Get the static power consumption.
      *
@@ -78,6 +94,22 @@ class MathExprPowerModel : public PowerModelState
     double getStaticPower() const { return eval(st_expr); }
 
     double getStaticPowerGc() const { return eval(st_expr_gc); }
+
+    double getStaticPower_0() const { return eval(st_expr_0); }
+
+    double getStaticPower_1() const { return eval(st_expr_1); }
+
+    double getStaticPower_2() const { return eval(st_expr_2); }
+
+    double getStaticPower_3() const { return eval(st_expr_3); }
+
+    double getStaticPower_4() const { return eval(st_expr_4); }
+
+    double getStaticPower_5() const { return eval(st_expr_5); }
+
+    double getStaticPower_6() const { return eval(st_expr_6); }
+
+    double getStaticPower_7() const { return eval(st_expr_7); }
 
     /**
      * Get the value for a variable (maps to a stat)
@@ -116,6 +148,30 @@ class MathExprPowerModel : public PowerModelState
 
     // Math expressions for dynamic and static power during gc
     MathExpr dyn_expr_gc, st_expr_gc;
+
+    MathExpr dyn_expr_0;
+    MathExpr st_expr_0;
+
+    MathExpr dyn_expr_1;
+    MathExpr st_expr_1;
+
+    MathExpr dyn_expr_2;
+    MathExpr st_expr_2;
+
+    MathExpr dyn_expr_3;
+    MathExpr st_expr_3;
+
+    MathExpr dyn_expr_4;
+    MathExpr st_expr_4;
+
+    MathExpr dyn_expr_5;
+    MathExpr st_expr_5;
+
+    MathExpr dyn_expr_6;
+    MathExpr st_expr_6;
+
+    MathExpr dyn_expr_7;
+    MathExpr st_expr_7;
 
     // Basename of the object in the gem5 stats hierachy
     std::string basename;

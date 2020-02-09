@@ -67,6 +67,15 @@ class PowerModelState : public SimObject
      */
     virtual double getDynamicPower() const = 0;
     virtual double getDynamicPowerGc() const = 0;
+    virtual double getDynamicPower_0() const = 0;
+    virtual double getDynamicPower_1() const = 0;
+    virtual double getDynamicPower_2() const = 0;
+    virtual double getDynamicPower_3() const = 0;
+    virtual double getDynamicPower_4() const = 0;
+    virtual double getDynamicPower_5() const = 0;
+    virtual double getDynamicPower_6() const = 0;
+    virtual double getDynamicPower_7() const = 0;
+
     /**
      * Get the static power consumption.
      *
@@ -74,6 +83,14 @@ class PowerModelState : public SimObject
      */
     virtual double getStaticPower() const = 0;
     virtual double getStaticPowerGc() const = 0;
+    virtual double getStaticPower_0() const = 0;
+    virtual double getStaticPower_1() const = 0;
+    virtual double getStaticPower_2() const = 0;
+    virtual double getStaticPower_3() const = 0;
+    virtual double getStaticPower_4() const = 0;
+    virtual double getStaticPower_5() const = 0;
+    virtual double getStaticPower_6() const = 0;
+    virtual double getStaticPower_7() const = 0;
     /**
      * Temperature update.
      *
@@ -88,34 +105,135 @@ class PowerModelState : public SimObject
     void regStats() {
         dynamicPower
           .method(this, &PowerModelState::getDynamicPower)
-          .name(params()->name + ".dynamic_power")
-          .desc("Dynamic power for this object (Watts)")
+          .name(params()->name + ".dynamic_energy")
+          .desc("Dynamic energy for this object (J)")
         ;
 
         staticPower
           .method(this, &PowerModelState::getStaticPower)
-          .name(params()->name + ".static_power")
-          .desc("Static power for this object (Watts)")
+          .name(params()->name + ".static_energy")
+          .desc("Static energy for this object (J)")
         ;
 
         dynamicPowerGc
           .method(this, &PowerModelState::getDynamicPowerGc)
-          .name(params()->name + ".dynamic_power_gc")
-          .desc("Dynamic power during gc for this object (Watts)")
+          .name(params()->name + ".dynamic_energy_gc")
+          .desc("Dynamic energy during gc for this object (J)")
         ;
 
         staticPowerGc
           .method(this, &PowerModelState::getStaticPowerGc)
-          .name(params()->name + ".static_power_gc")
-          .desc("Static power during gc for this object (Watts)")
+          .name(params()->name + ".static_energy_gc")
+          .desc("Static energy during gc for this object (J)")
         ;
+
+        dynamicPower_stage[0]
+          .method(this, &PowerModelState::getDynamicPower_0)
+          .name(params()->name + ".dynamic_energy_0")
+          .desc("Dynamic energy during stage 0 for this object (J)")
+        ;
+
+        staticPower_stage[0]
+          .method(this, &PowerModelState::getStaticPower_0)
+          .name(params()->name + ".static_energy_0")
+          .desc("Static energy during stage 0 for this object (J)")
+        ;
+
+        dynamicPower_stage[1]
+          .method(this, &PowerModelState::getDynamicPower_1)
+          .name(params()->name + ".dynamic_energy_1")
+          .desc("Dynamic energy during stage 1 for this object (J)")
+        ;
+
+        staticPower_stage[1]
+          .method(this, &PowerModelState::getStaticPower_1)
+          .name(params()->name + ".static_energy_1")
+          .desc("Static energy during stage 1 for this object (J)")
+        ;
+
+        dynamicPower_stage[2]
+          .method(this, &PowerModelState::getDynamicPower_2)
+          .name(params()->name + ".dynamic_energy_2")
+          .desc("Dynamic energy during stage 2 for this object (J)")
+        ;
+
+        staticPower_stage[2]
+          .method(this, &PowerModelState::getStaticPower_2)
+          .name(params()->name + ".static_energy_2")
+          .desc("Static energy during stage 2 for this object (J)")
+        ;
+
+        dynamicPower_stage[3]
+          .method(this, &PowerModelState::getDynamicPower_3)
+          .name(params()->name + ".dynamic_energy_3")
+          .desc("Dynamic energy during stage 3 for this object (J)")
+        ;
+
+        staticPower_stage[3]
+          .method(this, &PowerModelState::getStaticPower_3)
+          .name(params()->name + ".static_energy_3")
+          .desc("Static energy during stage 3 for this object (J)")
+        ;
+
+        dynamicPower_stage[4]
+          .method(this, &PowerModelState::getDynamicPower_4)
+          .name(params()->name + ".dynamic_energy_4")
+          .desc("Dynamic energy during stage 4 for this object (J)")
+        ;
+
+        staticPower_stage[4]
+          .method(this, &PowerModelState::getStaticPower_4)
+          .name(params()->name + ".static_energy_4")
+          .desc("Static energy during stage 4 for this object (J)")
+        ;
+
+        dynamicPower_stage[5]
+          .method(this, &PowerModelState::getDynamicPower_5)
+          .name(params()->name + ".dynamic_energy_5")
+          .desc("Dynamic energy during stage 5 for this object (J)")
+        ;
+
+        staticPower_stage[5]
+          .method(this, &PowerModelState::getStaticPower_5)
+          .name(params()->name + ".static_energy_5")
+          .desc("Static energy during stage 5 for this object (J)")
+        ;
+
+        dynamicPower_stage[6]
+          .method(this, &PowerModelState::getDynamicPower_6)
+          .name(params()->name + ".dynamic_energy_6")
+          .desc("Dynamic energy during stage 6 for this object (J)")
+        ;
+
+        staticPower_stage[6]
+          .method(this, &PowerModelState::getStaticPower_6)
+          .name(params()->name + ".static_energy_6")
+          .desc("Static energy during stage 6 for this object (J)")
+        ;
+
+        dynamicPower_stage[7]
+          .method(this, &PowerModelState::getDynamicPower_7)
+          .name(params()->name + ".dynamic_energy_7")
+          .desc("Dynamic energy during stage 7 for this object (J)")
+        ;
+
+        staticPower_stage[7]
+          .method(this, &PowerModelState::getStaticPower_7)
+          .name(params()->name + ".static_energy_7")
+          .desc("Static energy during stage 7 for this object (J)")
+        ;
+
+
     }
 
   protected:
     Stats::Value dynamicPower, staticPower, dynamicPowerGc, staticPowerGc;
-
+    Stats::Value dynamicPower_stage[8];
+    Stats::Value staticPower_stage[8];
     /** Current temperature */
     double _temp;
+
+
 
     /** The clocked object we belong to */
     ClockedObject * clocked_object;
@@ -141,6 +259,14 @@ class PowerModel : public SimObject
      */
     double getDynamicPower() const;
     double getDynamicPowerGc() const;
+    double getDynamicPower_0() const;
+    double getDynamicPower_1() const;
+    double getDynamicPower_2() const;
+    double getDynamicPower_3() const;
+    double getDynamicPower_4() const;
+    double getDynamicPower_5() const;
+    double getDynamicPower_6() const;
+    double getDynamicPower_7() const;
 
     /**
      * Get the static power consumption.
@@ -148,32 +274,137 @@ class PowerModel : public SimObject
      * @return Power (Watts) consumed by this object (static component)
      */
     double getStaticPower() const;
-    double getStaticPowerGc() const; 
+    double getStaticPowerGc() const;
+    double getStaticPower_0() const;
+    double getStaticPower_1() const;
+    double getStaticPower_2() const;
+    double getStaticPower_3() const;
+    double getStaticPower_4() const;
+    double getStaticPower_5() const;
+    double getStaticPower_6() const;
+    double getStaticPower_7() const;
 
     void regStats() {
         dynamicPower
           .method(this, &PowerModel::getDynamicPower)
-          .name(params()->name + ".dynamic_power")
-          .desc("Dynamic power for this power state")
+          .name(params()->name + ".dynamic_energy")
+          .desc("Dynamic energy for this power state")
         ;
 
         staticPower
           .method(this, &PowerModel::getStaticPower)
-          .name(params()->name + ".static_power")
-          .desc("Static power for this power state")
+          .name(params()->name + ".static_energy")
+          .desc("Static energy for this power state")
         ;
 
         dynamicPowerGc
           .method(this, &PowerModel::getDynamicPowerGc)
-          .name(params()->name + ".dynamic_power_gc")
-          .desc("Dynamic power during gc for this power state")
+          .name(params()->name + ".dynamic_energy_gc")
+          .desc("Dynamic energy during gc for this power state")
         ;
 
         staticPowerGc
           .method(this, &PowerModel::getStaticPowerGc)
-          .name(params()->name + ".static_power_gc")
-          .desc("Static power during gc for this power state")
+          .name(params()->name + ".static_energy_gc")
+          .desc("Static energy during gc for this power state")
         ;
+
+        dynamicPower_stage[0]
+            .method(this, &PowerModel::getDynamicPower_0)
+            .name(params()->name + ".dynamic_energy_0")
+            .desc("Dynamic energy during stage 0 for this power state")
+            ;
+
+        staticPower_stage[0]
+            .method(this, &PowerModel::getStaticPower_0)
+            .name(params()->name + ".static_energy_0")
+            .desc("Static energy during stage 0 for this power state")
+            ;
+
+        dynamicPower_stage[1]
+            .method(this, &PowerModel::getDynamicPower_1)
+            .name(params()->name + ".dynamic_energy_1")
+            .desc("Dynamic energy during stage 1 for this power state")
+            ;
+
+        staticPower_stage[1]
+            .method(this, &PowerModel::getStaticPower_1)
+            .name(params()->name + ".static_energy_1")
+            .desc("Static energy during stage 1 for this power state")
+            ;
+
+        dynamicPower_stage[2]
+            .method(this, &PowerModel::getDynamicPower_2)
+            .name(params()->name + ".dynamic_energy_2")
+            .desc("Dynamic energy during stage 2 for this power state")
+            ;
+
+        staticPower_stage[2]
+            .method(this, &PowerModel::getStaticPower_2)
+            .name(params()->name + ".static_energy_2")
+            .desc("Static energy during stage 2 for this power state")
+            ;
+
+        dynamicPower_stage[3]
+            .method(this, &PowerModel::getDynamicPower_3)
+            .name(params()->name + ".dynamic_energy_3")
+            .desc("Dynamic energy during stage 3 for this power state")
+            ;
+
+        staticPower_stage[3]
+            .method(this, &PowerModel::getStaticPower_3)
+            .name(params()->name + ".static_energy_3")
+            .desc("Static energy during stage 3 for this power state")
+            ;
+
+        dynamicPower_stage[4]
+            .method(this, &PowerModel::getDynamicPower_4)
+            .name(params()->name + ".dynamic_energy_4")
+            .desc("Dynamic energy during stage 4 for this power state")
+            ;
+
+        staticPower_stage[4]
+            .method(this, &PowerModel::getStaticPower_4)
+            .name(params()->name + ".static_energy_4")
+            .desc("Static energy during stage 4 for this power state")
+            ;
+
+        dynamicPower_stage[5]
+            .method(this, &PowerModel::getDynamicPower_5)
+            .name(params()->name + ".dynamic_energy_5")
+            .desc("Dynamic energy during stage 5 for this power state")
+            ;
+
+        staticPower_stage[5]
+            .method(this, &PowerModel::getStaticPower_5)
+            .name(params()->name + ".static_energy_5")
+            .desc("Static energy during stage 5 for this power state")
+            ;
+
+        dynamicPower_stage[6]
+            .method(this, &PowerModel::getDynamicPower_6)
+            .name(params()->name + ".dynamic_energy_6")
+            .desc("Dynamic energy during stage 6 for this power state")
+            ;
+
+        staticPower_stage[6]
+            .method(this, &PowerModel::getStaticPower_6)
+            .name(params()->name + ".static_energy_6")
+            .desc("Static energy during stage 6 for this power state")
+            ;
+
+        dynamicPower_stage[7]
+            .method(this, &PowerModel::getDynamicPower_7)
+            .name(params()->name + ".dynamic_energy_7")
+            .desc("Dynamic energy during stage 7 for this power state")
+            ;
+
+        staticPower_stage[7]
+            .method(this, &PowerModel::getStaticPower_7)
+            .name(params()->name + ".static_energy_7")
+            .desc("Static energy during stage 7 for this power state")
+            ;
+
     }
 
     void setClockedObject(ClockedObject *clkobj);
@@ -201,6 +432,8 @@ class PowerModel : public SimObject
     };
 
     Stats::Value dynamicPower, staticPower, dynamicPowerGc, staticPowerGc;
+    Stats::Value dynamicPower_stage[8];
+    Stats::Value staticPower_stage[8];
 
     /** Actual power models (one per power state) */
     std::vector<PowerModelState*> states_pm;
