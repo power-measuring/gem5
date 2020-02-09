@@ -237,6 +237,12 @@ AtomicSimpleCPU::activateContext(ThreadID thread_num)
         numCyclesgc += delta;
     }
 
+    for (int i = 0; i < 32; i++) {
+        if (system->getFlag(i)){
+            numCycles_stage[i] += delta;
+        }
+    }
+
     if (!tickEvent.scheduled()) {
         //Make sure ticks are still on multiples of cycles
         schedule(tickEvent, clockEdge(Cycles(0)));
@@ -659,6 +665,12 @@ AtomicSimpleCPU::tick()
         if(system->getgcFlag()){
             numCyclesgc++;
         }
+        for (int i = 0; i < 32; i++) {
+            if (system->getFlag(i)){
+                numCycles_stage[i]++;
+            }
+        }
+
         updateCycleCounters(BaseCPU::CPU_STATE_ON);
 
         if (!curStaticInst || !curStaticInst->isDelayedCommit()) {

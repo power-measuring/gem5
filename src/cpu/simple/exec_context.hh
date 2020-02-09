@@ -85,6 +85,9 @@ class SimpleExecContext : public ExecContext {
     Counter numInstgc;
     Stats::Scalar numInstsgc;
 
+    Counter numInst_stage[32];
+    Stats::Scalar numInsts_stage[32];
+
     /** Stat for the IPC per thread. */
     Stats::Formula ipc;
     /** Stat for the total IPC. */
@@ -94,6 +97,11 @@ class SimpleExecContext : public ExecContext {
     Stats::Formula ipcgc;
     /** Stat for the total IPC. */
     Stats::Formula totalIpcgc;
+
+     /** Stat for the IPC per thread. */
+    Stats::Formula ipc_stage[32];
+    /** Stat for the total IPC. */
+    Stats::Formula totalIpc_stage[32];
 
     Counter numOp;
     Stats::Scalar numOps;
@@ -185,7 +193,12 @@ class SimpleExecContext : public ExecContext {
     SimpleExecContext(BaseSimpleCPU* _cpu, SimpleThread* _thread)
         : cpu(_cpu), thread(_thread), fetchOffset(0), stayAtPC(false),
         numInst(0),numInstgc(0), numOp(0), numLoad(0), lastIcacheStall(0), lastDcacheStall(0)
-    { }
+    {
+
+            for (int i = 0; i < 32; i++){
+                numInst_stage[i] = 0;
+            }
+    }
 
     /** Reads an integer register. */
     RegVal

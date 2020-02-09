@@ -738,6 +738,14 @@ FullO3CPU<Impl>::totalInstsgc() const
 
 template <class Impl>
 Counter
+FullO3CPU<Impl>::totalInsts_stage(int index) const
+{
+
+    return 0;
+}
+
+template <class Impl>
+Counter
 FullO3CPU<Impl>::totalOps() const
 {
     Counter total(0);

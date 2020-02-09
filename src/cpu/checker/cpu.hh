@@ -171,6 +171,12 @@ class CheckerCPU : public BaseCPU, public ExecContext
         return 0;
     }
 
+    virtual Counter totalInsts_stage(int index) const override
+    {
+
+        return 0;
+    }
+
     virtual Counter totalOps() const override
     {
         return 0;

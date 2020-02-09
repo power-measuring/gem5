@@ -608,6 +608,12 @@ BaseKvmCPU::totalInstsgc() const
 }
 
 Counter
+BaseKvmCPU::totalInsts_stage(int index) const
+{
+    return 0;
+}
+
+Counter
 BaseKvmCPU::totalOps() const
 {
     hack_once("Pretending totalOps is equivalent to totalInsts()\n");

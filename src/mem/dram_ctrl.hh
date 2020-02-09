@@ -343,11 +343,9 @@ class DRAMCtrl : public QoS::MemCtrl
         Stats::Scalar selfRefreshEnergy;
 
         Stats::Scalar totalEnergy;
-        Stats::Scalar totalEnergyGc;
-        Stats::Scalar totalEnergyGcNot;
+        Stats::Scalar totalEnergy_stage[32];
         Stats::Scalar averagePower;
-        Stats::Scalar averagePowerGc;
-        Stats::Scalar averagePowerGcNot;
+        Stats::Scalar averagePower_stage[32];
 
         /**
          * Stat to track total DRAM idle time

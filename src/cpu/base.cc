@@ -352,6 +352,10 @@ BaseCPU::init()
 
         verifyMemoryMode();
     }
+
+//    for (int i = 0; i < 32; i++){
+//        myflags[i] = false;
+//    }
 }
 
 void
@@ -434,6 +438,13 @@ BaseCPU::regStats()
         .name(name() + ".numCyclesgc")
         .desc("number of cpu cycles simulated during gc")
         ;
+
+    for (int i = 0; i < 32; i++) {
+        numCycles_stage[i]
+            .name(name() + ".numCycles_" + std::to_string(i))
+            .desc("number of cpu cycles simulated during this stage")
+            ;
+    }
 
     numWorkItemsStarted
         .name(name() + ".numWorkItemsStarted")

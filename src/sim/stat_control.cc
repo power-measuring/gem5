@@ -68,6 +68,8 @@ Stats::Formula simTicksgc;
 Stats::Value finalTick;
 Stats::Value simFreq;
 
+Stats::Formula simSeconds_stage[32];
+Stats::Formula simTicks_stage[32];
 namespace Stats {
 
 Time statTime(true);

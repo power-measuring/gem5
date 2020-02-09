@@ -150,6 +150,7 @@ class ScalarInfo : public Info
     virtual Counter value() const = 0;
     virtual Result result() const = 0;
     virtual Result total() const = 0;
+
 };
 
 class VectorInfo : public Info

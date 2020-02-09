@@ -112,6 +112,7 @@ class BaseKvmCPU : public BaseCPU
     Counter totalInsts() const override;
     Counter totalOps() const override;
     Counter totalInstsgc() const override;
+    Counter totalInsts_stage(int index) const override;
 
     /**
      * Callback from KvmCPUPort to transition the CPU out of RunningMMIOPending

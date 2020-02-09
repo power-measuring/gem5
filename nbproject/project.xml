@@ -6,7 +6,7 @@
             <name>gem5</name>
             <c-extensions>c,i</c-extensions>
             <cpp-extensions>cc,cpp</cpp-extensions>
-            <header-extensions>h,hpp</header-extensions>
+            <header-extensions>h,hh,hpp,inc</header-extensions>
             <sourceEncoding>UTF-8</sourceEncoding>
             <make-dep-projects/>
             <sourceRootList>
@@ -18,7 +18,7 @@
                     <type>0</type>
                 </confElem>
                 <confElem>
-                    <name>release</name>
+                    <name>fast</name>
                     <type>0</type>
                 </confElem>
             </confList>

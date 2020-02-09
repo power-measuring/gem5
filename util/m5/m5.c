@@ -58,6 +58,7 @@
 #include <unistd.h>
 
 #include <gem5/m5ops.h>
+
 #include "m5_mmap.h"
 
 char *progname;

@@ -44,6 +44,7 @@
 #include "base/chunk_generator.hh"
 #include "base/trace.hh"
 #include "config/the_isa.hh"
+#include "cpu/base.hh"
 #include "cpu/thread_context.hh"
 #include "dev/net/dist_iface.hh"
 #include "mem/page_table.hh"
@@ -80,6 +81,32 @@ SyscallReturn resetgcFlagFunction(SyscallDesc *desc, int callnum,
     System *sys = tc->getSystemPtr();
     
     sys->setgcFlag(false);
+    return 0;
+}
+
+SyscallReturn ctrlMyflagsFunction(SyscallDesc *desc, int callnum,
+                  ThreadContext *tc)
+{
+    int num_index = 0;
+    int value_index = 1;
+    auto p = tc->getProcessPtr();
+    int flagNum = p->getSyscallArg(tc, num_index);
+    bool flag_value = p->getSyscallArg(tc, value_index);
+    warn("set #%d flag to %d", flagNum, flag_value?1:0);
+    System *sys = tc->getSystemPtr();
+    //BaseCPU *cpu = tc->getCpuPtr();
+
+    //cpu->setFlag(flagNum, flag_value);
+
+//    if (cpu->cpuId() != 0){
+//        warn("cpu id : %d", cpu->cpuId());
+//        while (1){
+//        //waiting
+//        }
+//    }
+//
+//
+    sys->setFlag(flagNum, flag_value);
     return 0;
 }
 

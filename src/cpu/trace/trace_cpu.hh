@@ -167,6 +167,12 @@ class TraceCPU : public BaseCPU
         return 0;
     }
 
+    Counter totalInsts_stage(int index) const
+    {
+        //Counter cnt[32] = {0};
+        return 0;
+    }
+
     /**
      * Return totalOps as the number of committed micro-ops plus the
      * speculatively issued loads that are modelled in the TraceCPU replay.

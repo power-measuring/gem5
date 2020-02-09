@@ -942,6 +942,12 @@ TimingSimpleCPU::updateCycleCounts()
         numCyclesgc += delta;
     }
 
+    for (int i = 0; i < 32; i++) {
+        if (system->getFlag(i)){
+            numCycles_stage[i] += delta;
+        }
+    }
+
     previousCycle = curCycle();
 }
 

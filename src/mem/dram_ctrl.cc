@@ -2398,12 +2398,13 @@ DRAMCtrl::Rank::updatePowerStats()
     // Accumulate window energy into the total energy.
     totalEnergy += energy.window_energy * memory.devicesPerRank;
     
-    if(memory.system()->getgcFlag()){
-        totalEnergyGc += energy.window_energy * memory.devicesPerRank;
-    } else {
-        totalEnergyGcNot += energy.window_energy * memory.devicesPerRank;
+    for (int i = 0; i < 32; i++){
+       if (memory.system()->getFlag(i)){
+            totalEnergy_stage[i] += energy.window_energy*memory.devicesPerRank;
+        }
     }
-    
+
+
     // Average power must not be accumulated but calculated over the time
     // since last stats reset. SimClock::Frequency is tick period not tick
     // frequency.
@@ -2413,12 +2414,11 @@ DRAMCtrl::Rank::updatePowerStats()
     averagePower = (totalEnergy.value() /
                     (curTick() - memory.lastStatsResetTick)) *
                     (SimClock::Frequency / 1000000000.0);
-    averagePowerGc = (totalEnergyGc.value() /
-                    (curTick() - memory.lastStatsResetTick)) *
-                    (SimClock::Frequency / 1000000000.0);
-    averagePowerGcNot = (totalEnergyGcNot.value() /
-                    (curTick() - memory.lastStatsResetTick)) *
-                    (SimClock::Frequency / 1000000000.0);
+    for (int i = 0; i < 32; i++) {
+        averagePower_stage[i] = (totalEnergy_stage[i].value() /
+                        (curTick() - memory.lastStatsResetTick)) *
+                        (SimClock::Frequency / 1000000000.0);
+    }
 }
 
 void
@@ -2503,25 +2503,22 @@ DRAMCtrl::Rank::regStats()
         .name(name() + ".totalEnergy")
         .desc("Total energy per rank (pJ)");
     
-    totalEnergyGc
-        .name(name() + ".totalEnergyGc")
-        .desc("Total energy per rank (pJ) during gc");
-    
-    totalEnergyGcNot
-        .name(name() + ".totalEnergyGcNot")
-        .desc("Total energy per rank (pJ) not during gc");
+
+    for (int i = 0; i < 32; i++) {
+        totalEnergy_stage[i]
+            .name(name() + ".totalEnergy_stage_" + std::to_string(i))
+            .desc("Total energy per rank (pJ) during this stage");
+    }
 
     averagePower
         .name(name() + ".averagePower")
         .desc("Core power per rank (mW)");
     
-    averagePowerGc
-        .name(name() + ".averagePowerGc")
-        .desc("Core power per rank (mW) during gc");
-    
-    averagePowerGcNot
-    .name(name() + ".averagePowerGcNot")
-    .desc("Core power per rank (mW) not during gc");
+    for (int i = 0; i < 32; i++) {
+        averagePower_stage[i]
+            .name(name() + ".averagePower_" + std::to_string(i))
+            .desc("Core power per rank (mW) during this stage");
+    }
 
     totalIdleTime
         .name(name() + ".totalIdleTime")

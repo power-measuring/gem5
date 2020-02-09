@@ -39,4 +39,7 @@ extern Stats::Value simFreq;
 extern Stats::Formula simTicksgc;
 extern Stats::Formula simSecondsgc;
 
+extern Stats::Formula simTicks_stage[32];
+extern Stats::Formula simSeconds_stage[32];
+
 #endif // __SIM_SIM_STATS_HH__

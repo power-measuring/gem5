@@ -181,6 +181,14 @@ BaseSimpleCPU::countInst()
             t_info.numInstsgc++;
         }
 
+        for (int i = 0; i < 32; i++){
+            if (system->getFlag(i)){
+                t_info.numInst_stage[i]++;
+                t_info.numInsts_stage[i]++;
+            }
+
+        }
+
         system->totalNumInsts++;
         t_info.thread->funcExeInst++;
     }
@@ -205,6 +213,17 @@ BaseSimpleCPU::totalInstsgc() const
     Counter total_inst = 0;
     for (auto& t_info : threadInfo) {
         total_inst += t_info->numInstgc;
+    }
+
+    return total_inst;
+}
+
+Counter
+BaseSimpleCPU::totalInsts_stage(int index) const {
+
+    Counter total_inst = 0;
+    for (auto& t_info : threadInfo) {
+        total_inst += t_info->numInst_stage[index];
     }
 
     return total_inst;
@@ -252,7 +271,27 @@ BaseSimpleCPU::regStats()
             .name(thread_str + ".committedInsts")
             .desc("Number of instructions committed")
             ;
-        
+
+        for (int i = 0; i < 32; i++) {
+            t_info.numInsts_stage[i]
+                .name(thread_str + ".committedInsts_" + std::to_string(i))
+                .desc("Number of instructions committed during this stage")
+                ;
+            t_info.ipc_stage[i]
+                .name(thread_str + ".ipc_" + std::to_string(i))
+                .desc("IPC: Instructions Per Cycle")
+                .precision(6);
+
+            t_info.ipc_stage[i] = t_info.numInsts_stage[i]/numCycles_stage[i];
+
+            t_info.totalIpc_stage[i]
+                .name(thread_str + ".ipc_total_" + std::to_string(i))
+                .desc("IPC: Total IPC of All Threads")
+                .precision(6);
+            t_info.totalIpc_stage[i] =
+                    sum(t_info.numInsts_stage[i]) / numCycles_stage[i];
+        }
+
         t_info.numInstsgc
             .name(thread_str + ".committedInstsgc")
             .desc("Number of instructions committed during gc")

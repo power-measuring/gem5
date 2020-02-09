@@ -202,6 +202,11 @@ System::System(Params *p)
     // Set back pointers to the system in all memories
     for (int x = 0; x < params()->memories.size(); x++)
         params()->memories[x]->system(this);
+
+    for (int i = 0; i < 32; i++) {
+        myflags[i] = false;
+    }
+
 }
 
 System::~System()
@@ -463,6 +468,31 @@ System::regStats()
         .desc("Number of seconds simulated")
         ;
     simSecondsgc = simTicksgc / simFreq;
+//
+//    for (int i = 8; i < 18; i++){
+//        if (_numTicks[i] != 0){
+//            _numTicks[0] += _numTicks[i];
+//        }
+//    }
+
+    for (int i = 0; i < 32 ; i++) {
+        _numTicks[i]
+            .name("num_ticks_" + std::to_string(i))
+            .desc("Number of ticks simulated during this stage")
+            ;
+
+        simTicks_stage[i]
+            .name("sim_ticks_" + std::to_string(i))
+            .desc("Number of ticks simulated during this stage")
+            ;
+        simTicks_stage[i] = _numTicks[i];
+
+        simSeconds_stage[i]
+            .name("sim_seconds_" + std::to_string(i))
+            .desc("Number of seconds simulated during this stage")
+            ;
+        simSeconds_stage[i] = simTicks_stage[i] / simFreq;
+    }
 
     for (uint32_t j = 0; j < numWorkIds ; j++) {
         workItemStats[j] = new Stats::Histogram();

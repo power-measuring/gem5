@@ -109,6 +109,7 @@ class ScalarInfoProxy : public InfoProxy<Stat, ScalarInfo>
     Counter value() const { return this->s.value(); }
     Result result() const { return this->s.result(); }
     Result total() const { return this->s.total(); }
+
 };
 
 template <class Stat>
@@ -766,6 +767,7 @@ class ValueProxy : public ProxyInfo
     Counter value() const { return *scalar; }
     Result result() const { return *scalar; }
     Result total() const { return *scalar; }
+
 };
 
 template <class T>
@@ -779,6 +781,7 @@ class FunctorProxy : public ProxyInfo
     Counter value() const { return (*functor)(); }
     Result result() const { return (*functor)(); }
     Result total() const { return (*functor)(); }
+
 };
 
 /**
@@ -795,9 +798,12 @@ class MethodProxy : public ProxyInfo
 
   public:
     MethodProxy(T *obj, MethodPointer meth) : object(obj), method(meth) {}
+
     Counter value() const { return (object->*method)(); }
     Result result() const { return (object->*method)(); }
     Result total() const { return (object->*method)(); }
+
+
 };
 
 template <class Derived>
@@ -807,7 +813,7 @@ class ValueBase : public DataWrap<Derived, ScalarInfoProxy>
     ProxyInfo *proxy;
 
   public:
-    ValueBase() : proxy(NULL) { }
+    ValueBase() : proxy(NULL) {}
     ~ValueBase() { if (proxy) delete proxy; }
 
     template <class T>
@@ -844,9 +850,10 @@ class ValueBase : public DataWrap<Derived, ScalarInfoProxy>
         return this->self();
     }
 
-    Counter value() { return proxy->value(); }
-    Result result() const { return proxy->result(); }
-    Result total() const { return proxy->total(); };
+
+    Counter value() { return proxy->value();}
+    Result result() const { return proxy->result();}
+    Result total() const { return proxy->total();};
     size_type size() const { return proxy->size(); }
 
     std::string str() const { return proxy->str(); }

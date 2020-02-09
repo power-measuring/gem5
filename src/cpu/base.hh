@@ -120,10 +120,14 @@ class BaseCPU : public ClockedObject
     // therefore no setCpuId() method is provided
     int _cpuId;
 
-    /** Each cpu will have a socket ID that corresponds to its physical location
-     * in the system. This is usually used to bucket cpu cores under single DVFS
-     * domain. This information may also be required by the OS to identify the
-     * cpu core grouping (as in the case of ARM via MPIDR register)
+//    /*flag for specific segment*/
+//    bool myflags[32];
+
+    /** Each cpu will have a socket ID that corresponds to its physical
+     * location in the system. This is usually used to bucket cpu cores under
+     * single DVFS domain. This information may also be required by the OS to
+     * identify the cpu core grouping
+     * (as in the case of ARM via MPIDR register)
      */
     const uint32_t _socketId;
 
@@ -170,6 +174,9 @@ class BaseCPU : public ClockedObject
 
     /** Reads this CPU's ID. */
     int cpuId() const { return _cpuId; }
+
+//    void setFlag(int flagnum, bool value){ myflags[flagnum] = value; }
+//    bool getFlag(int num) { return myflags[num]; }
 
     /** Reads this CPU's Socket ID. */
     uint32_t socketId() const { return _socketId; }
@@ -436,6 +443,8 @@ class BaseCPU : public ClockedObject
     virtual Counter totalInsts() const = 0;
     virtual Counter totalInstsgc() const = 0;
 
+    virtual Counter totalInsts_stage(int index) const = 0;
+
     virtual Counter totalOps() const = 0;
 
     /**
@@ -622,6 +631,8 @@ class BaseCPU : public ClockedObject
     Stats::Scalar numCycles;
     // Number of CPU cycles simulated during gc
     Stats::Scalar numCyclesgc;
+    Stats::Scalar numCycles_stage[32];
+
     Stats::Scalar numWorkItemsStarted;
     Stats::Scalar numWorkItemsCompleted;
 

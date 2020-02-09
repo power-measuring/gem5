@@ -47,6 +47,7 @@
 #ifndef __SYSTEM_HH__
 #define __SYSTEM_HH__
 
+#include <stack>
 #include <string>
 #include <unordered_map>
 #include <utility>
@@ -215,8 +216,16 @@ class System : public SimObject
 
     uint64_t init_param;
 
+    /*flag for specific segment*/
+    bool myflags[32];
+    Tick _startTick[32];
+    Tick _endTick[32];
+    Stats::Scalar _numTicks[32];
+
+    std::stack<int> repeated_flag_index;
+
     /*flag for grabage collection*/
-    bool gcFlag;
+    bool gcFlag = false;
     Tick gcstartTick;
     Tick gcendTick;
     Stats::Scalar numTicksgc;
@@ -230,6 +239,50 @@ class System : public SimObject
             gcendTick = curTick();
             numTicksgc += curTick() - gcstartTick;
         }
+    }
+
+    void setFlag(int index, bool value){
+
+        printf("set #%d flag to %d\n", index, value?1:0);
+
+//        bool old_value = myflags[index];
+        //assert(old_value != value);
+
+
+        if (value){
+
+            if (index == 0){
+                if (repeated_flag_index.empty()){
+                    myflags[index] = value;
+                    _startTick[index] = curTick();
+                }
+                repeated_flag_index.push(index);
+            } else {
+                _startTick[index] = curTick();
+                myflags[index] = value;
+            }
+
+
+        } else {
+
+            if (index == 0){
+                repeated_flag_index.pop();
+                if (repeated_flag_index.empty()){
+                    myflags[index] = value;
+                    _endTick[index] = curTick();
+                    _numTicks[index] += _endTick[index] - _startTick[index];
+                }
+            } else {
+                myflags[index] = value;
+                _endTick[index] = curTick();
+                _numTicks[index] += _endTick[index] - _startTick[index];
+            }
+
+        }
+    }
+
+    bool getFlag(int index){
+        return myflags[index];
     }
 
     bool getgcFlag(){
